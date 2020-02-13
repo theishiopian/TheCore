@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &125736699
 Rigidbody2D:
   serializedVersion: 4
@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 2132564893}
   - component: {fileID: 2132564892}
   - component: {fileID: 2132564894}
+  - component: {fileID: 2132564895}
   m_Layer: 0
   m_Name: Blocks
   m_TagString: Blocks
@@ -585,3 +586,17 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+--- !u!114 &2132564895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132564890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc79b79a8f691db46a344bb0783f9552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depth: 4096
+  fillTile: {fileID: 11400000, guid: 3b0d10b1950aba24b84ea09444845305, type: 2}
