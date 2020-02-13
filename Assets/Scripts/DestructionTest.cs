@@ -26,13 +26,17 @@ public class DestructionTest : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(screenPos, Vector2.zero);
 
-        if (Input.GetMouseButtonDown(0) && hit.collider.CompareTag("Blocks"))
+        try
         {
-            Grid grid = tiles.layoutGrid;
-            Vector3Int gridPos = grid.WorldToCell(hit.point);
-            tiles.SetTile(gridPos, null);
-            print(hit.collider.name);
+            if (Input.GetMouseButtonDown(0) && hit.collider.CompareTag("Blocks"))
+            {
+                Grid grid = tiles.layoutGrid;
+                Vector3Int gridPos = grid.WorldToCell(hit.point);
+                tiles.SetTile(gridPos, null);
+                print(hit.collider.name);
+            }
         }
-
+        catch
+        { }
     }
 }
