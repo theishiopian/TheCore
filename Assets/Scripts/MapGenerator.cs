@@ -36,13 +36,13 @@ public class MapGenerator : MonoBehaviour
         Debug.Log("Tiles placed: " + tiles);
     }
 
-    void Update()//TODO delete
-    {
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            GenerateMap();
-        }
-    }
+    //void Update()//TODO delete
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Delete))
+    //    {
+    //        GenerateMap();
+    //    }
+    //}
 
     void GenerateMap()
     {
