@@ -33,7 +33,6 @@ public class DestructionTest : MonoBehaviour
                 Grid grid = tiles.layoutGrid;
                 Vector3Int gridPos = grid.WorldToCell(hit.point);
                 tiles.SetTile(gridPos, null);
-                print(hit.collider.name);
             }
         }
         catch

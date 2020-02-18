@@ -25,6 +25,7 @@ public class MapGenerator : MonoBehaviour
     private Grid grid;
 
     int iterations = 0;
+    int tiles = 0;
 
     void Start()
     {
@@ -51,9 +52,11 @@ public class MapGenerator : MonoBehaviour
             SmoothMap();
         }
 
-        //todo ores pass
+        //todo ores pass?
 
         PopulateTileMap();
+        Debug.Log("Loop cycles: " + iterations);
+        Debug.Log("Tiles placed:" + tiles);
     }
 
     private string seed;
@@ -130,8 +133,6 @@ public class MapGenerator : MonoBehaviour
         return wallCount;
     }
 
-    
-
     void PopulateTileMap()
     {
         if (intMap != null)
@@ -144,12 +145,11 @@ public class MapGenerator : MonoBehaviour
                     if(intMap[x,y] > 0)
                     {
                         iterations++;
+                        tiles++;
                         tileMap.SetTile(new Vector3Int(x-(width/2), -y, 0), fillTile);
                     }
                 }
             }
         }
-
-        Debug.Log(iterations);
     }
 }
