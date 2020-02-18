@@ -154,13 +154,13 @@ public class MapGenerator : MonoBehaviour
         int currentLayer = 1;
         if (intMap != null)
         {
-            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);
+            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);
             for (int y = 0; y < depth; y++)
             {
                 if ((y / currentLayer) == layerDepth)
                 {
                     currentLayer++;
-                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);
+                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);
                     //Debug.Log("moving down");
                 }
 
@@ -179,7 +179,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private float[] generateWeights(int size)
+    private float[] generateWeights(int size, int increment)
     {
         float[] weights = new float[size];
 
@@ -187,9 +187,9 @@ public class MapGenerator : MonoBehaviour
 
         for(int i = 1; i != size; i++)
         {
-            total -= 10;
+            total -= increment;
 
-            weights[i] = 10;
+            weights[i] = increment;
         }
 
         weights[0] = total;
