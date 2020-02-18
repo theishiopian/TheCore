@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[System.Serializable]
+public class Layer
+{
+    public List<TileBase> list;
+}
+
+[System.Serializable]
+public class LayerList
+{
+    public List<Layer> list;
+}
+
 public class MapGenerator : MonoBehaviour
 {
     public int width;
@@ -10,14 +22,15 @@ public class MapGenerator : MonoBehaviour
 
     public bool useRandomSeed = true;
     public string customSeed;
-    
+
     [Range(0, 100)]
     public int randomFillPercent = 50;
 
     [Range(0, 10)]
     public int smoothingIterations = 5;
 
-    public TileBase[] fillTiles;
+    [SerializeField]
+    public LayerList fillTiles;
 
     private Tilemap tileMap;
     private Grid grid;
@@ -72,7 +85,7 @@ public class MapGenerator : MonoBehaviour
             {
                 if (x == 0 || x == width - 1 || y == 0 || y == depth - 1)
                 {
-                    intMap[x, y] = 1;//TODO values, or maybe extend tile, or maybe both
+                    intMap[x, y] = 1;//TODO use higher value for ores and unbreakables
                 }
                 else
                 {
@@ -89,8 +102,8 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < depth; y++)
             {
-                int neighbourWallTiles = GetSurroundingWallCount(x, y);
-
+                int neighbourWallTiles = TileSurvey(x, y).surroundingTiles;
+                //todo support for ore
                 if (neighbourWallTiles > 4)
                     intMap[x, y] = 1;
                 else if (neighbourWallTiles < 4)
@@ -100,7 +113,13 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    int GetSurroundingWallCount(int gridX, int gridY)
+    struct TileSurveyData
+    {
+        public int tileNum;
+        public int surroundingTiles;
+    }
+
+    TileSurveyData TileSurvey(int gridX, int gridY)
     {
         int wallCount = 0;
         for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++)
@@ -121,24 +140,28 @@ public class MapGenerator : MonoBehaviour
                 cycles++;
             }
         }
-
-        return wallCount;
+        TileSurveyData data = new TileSurveyData();
+        data.surroundingTiles = wallCount;
+        data.tileNum = intMap[gridX, gridY];
+        return data;
     }
 
     void PopulateTileMap()
     {
-        int layers = fillTiles.Length;
+        int layers = fillTiles.list.Count;
         int layerDepth = depth / layers;
 
         int currentLayer = 1;
         if (intMap != null)
         {
+            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);
             for (int y = 0; y < depth; y++)
             {
                 if ((y / currentLayer) == layerDepth)
                 {
                     currentLayer++;
-                    Debug.Log("moving down");
+                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);
+                    //Debug.Log("moving down");
                 }
 
                 for (int x = 0; x < width; x++)
@@ -147,12 +170,68 @@ public class MapGenerator : MonoBehaviour
                     {
                         cycles++;
                         tiles++;
-                        tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles[currentLayer-1]);
+
+
+                        tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[GetRandomWeightedIndex(weights)]);
                     }
                 }
-
             }
         }
+    }
+
+    private float[] generateWeights(int size)
+    {
+        float[] weights = new float[size];
+
+        float total = 100;
+
+        for(int i = 1; i != size; i++)
+        {
+            total -= 10;
+
+            weights[i] = 10;
+        }
+
+        weights[0] = total;
+
+        return weights;
+    }
+
+
+    private int GetRandomWeightedIndex(float[] weights)
+    {
+        if (weights == null || weights.Length == 0) return -1;
+
+        float w;
+        float t = 0;
+        int i;
+        for (i = 0; i < weights.Length; i++)
+        {
+            w = weights[i];
+
+            if (float.IsPositiveInfinity(w))
+            {
+                return i;
+            }
+            else if (w >= 0f && !float.IsNaN(w))
+            {
+                t += weights[i];
+            }
+        }
+
+        float r = Random.value;
+        float s = 0f;
+
+        for (i = 0; i < weights.Length; i++)
+        {
+            w = weights[i];
+            if (float.IsNaN(w) || w <= 0f) continue;
+
+            s += w / t;
+            if (s >= r) return i;
+        }
+        Debug.Log("error detected in weighted random, defaulting to null tile");
+        return 0;
     }
 }
 
