@@ -30,22 +30,23 @@ public class MapGenerator : MonoBehaviour
     public int smoothingIterations = 5;//how many times the generator smooths the tiles
 
     [SerializeField]
-    public LayerList fillTiles;
+    public LayerList fillTiles;//the tiles to generate, organized by layer. the first tile in each layyer is the fill tile, the rest are ores
 
-    private Tilemap tileMap;
-    private Grid grid;
-    private string seed;
-    private int[,] intMap;
+    private Tilemap tileMap;//cache to store the output tilemap
+    private Grid grid;//cache to store output tilemap alignment grid
+    private string seed;//seed for rng
+    private int[,] intMap;//storage for initial map shape
 
-
+    //debug log variables
     int cycles = 0;
-
     int tiles = 0;
 
     void Start()
     {
+        //cache stuff
         tileMap = this.GetComponent<Tilemap>();
         grid = tileMap.layoutGrid;
+        //do the thing
         GenerateMap();
         Debug.Log("Loop cycles: " + cycles);
         Debug.Log("Tiles placed: " + tiles);
@@ -53,22 +54,26 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateMap()
     {
+        //fill map with random squares
         intMap = new int[width, depth];
         RandomFillMap();
 
+        //do smoothing
         for (int i = 0; i < smoothingIterations; i++)
         {
             SmoothMap();
         }
 
+        //generate actual tiles
         PopulateTileMap();
     }
 
+    //fill map with random squares
     void RandomFillMap()
     {
         if (useRandomSeed)
         {
-            seed = System.DateTime.Now.ToString();
+            seed = System.DateTime.Now.ToString();//generate seed from date
         }
         else
         {
@@ -94,7 +99,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    void SmoothMap()
+    void SmoothMap()//run smoothing iteration via cellular automata
     {
         for (int x = 0; x < width; x++)
         {
@@ -110,6 +115,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    //helper method for cellular automata algorithm
     int GetSurroundingTileCount(int gridX, int gridY)
     {
         int wallCount = 0;
@@ -134,6 +140,7 @@ public class MapGenerator : MonoBehaviour
         return wallCount;
     }
 
+    //meat and potatoes. this is where the tiles themselves are placed
     void PopulateTileMap()
     {
         int layers = fillTiles.list.Count;
@@ -142,14 +149,13 @@ public class MapGenerator : MonoBehaviour
         int currentLayer = 1;
         if (intMap != null)
         {
-            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);
+            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);//generate inital weights
             for (int y = 0; y < depth; y++)
             {
-                if ((y / currentLayer) == layerDepth)
+                if ((y / currentLayer) == layerDepth)//if at layer transition
                 {
                     currentLayer++;
-                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);
-                    //Debug.Log("moving down");
+                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);//regenerate weights for next layer
                 }
 
                 for (int x = 0; x < width; x++)
@@ -159,6 +165,7 @@ public class MapGenerator : MonoBehaviour
                         cycles++;
                         tiles++;
                         
+                        //place tile
                         tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[GetRandomWeightedIndex(weights)]);
                     }
                 }
@@ -166,6 +173,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    //helper method for making list of weights
     private float[] generateWeights(int size, int increment)
     {
         float[] weights = new float[size];
@@ -184,7 +192,7 @@ public class MapGenerator : MonoBehaviour
         return weights;
     }
 
-
+    //helper method to get random index from weight list
     private int GetRandomWeightedIndex(float[] weights)
     {
         if (weights == null || weights.Length == 0) return -1;
@@ -217,7 +225,7 @@ public class MapGenerator : MonoBehaviour
             s += w / t;
             if (s >= r) return i;
         }
-        Debug.Log("error detected in weighted random, defaulting to null tile");
+        Debug.Log("error detected in weighted random, defaulting to fill tile value");
         return 0;
     }
 }
