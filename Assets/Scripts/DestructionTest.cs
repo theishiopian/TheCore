@@ -28,7 +28,7 @@ public class DestructionTest : MonoBehaviour
 
         try
         {
-            if (Input.GetMouseButtonDown(0) && hit.collider.CompareTag("Blocks"))
+            if (Input.GetMouseButton(0) && hit.collider.CompareTag("Blocks"))
             {
                 Grid grid = tiles.layoutGrid;
                 Vector3Int gridPos = grid.WorldToCell(hit.point);

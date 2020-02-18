@@ -736,4 +736,4 @@ MonoBehaviour:
   customSeed: 
   randomFillPercent: 50
   smoothingIterations: 5
-  fillTile: {fileID: 11400000, guid: 3bc2b5fe412b2fb418fb32e07354ea29, type: 2}
+  fillTile: {fileID: 11400000, guid: 1ce01332546fafe44bec79e2b61b2b05, type: 2}
