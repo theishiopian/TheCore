@@ -17,7 +17,7 @@ public class MapGenerator : MonoBehaviour
     [Range(0, 10)]
     public int smoothingIterations = 5;
 
-    public TileBase fillTile;
+    public TileBase[] fillTiles;
 
     private Tilemap tileMap;
     private Grid grid;
@@ -127,21 +127,33 @@ public class MapGenerator : MonoBehaviour
 
     void PopulateTileMap()
     {
+        int layers = fillTiles.Length;
+        int layerDepth = depth / layers;
+
+        int currentLayer = 1;
         if (intMap != null)
         {
-            for (int x = 0; x < width; x++)
+            for (int y = 0; y < depth; y++)
             {
-                for (int y = 0; y < depth; y++)
+                if ((y / currentLayer) == layerDepth)
                 {
+                    currentLayer++;
+                    Debug.Log("moving down");
+                }
 
-                    if(intMap[x,y] > 0)
+                for (int x = 0; x < width; x++)
+                {
+                    if (intMap[x, y] > 0)
                     {
                         cycles++;
                         tiles++;
-                        tileMap.SetTile(new Vector3Int(x-(width/2), -y, 0), fillTile);
+                        tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles[currentLayer-1]);
                     }
                 }
+
             }
         }
     }
 }
+
+
