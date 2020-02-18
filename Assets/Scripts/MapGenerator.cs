@@ -17,14 +17,18 @@ public class MapGenerator : MonoBehaviour
     [Range(0, 10)]
     public int smoothingIterations = 5;
 
-    int[,] intMap;
-
     public TileBase fillTile;
 
     private Tilemap tileMap;
     private Grid grid;
+    private string seed;
+    private int[,] intMap;
 
+<<<<<<< HEAD
     int iterations = 0;
+=======
+    int cycles = 0;
+>>>>>>> ecc063c7daf3da6bccb8bd7fcdbe77077acdc953
     int tiles = 0;
 
     void Start()
@@ -32,15 +36,17 @@ public class MapGenerator : MonoBehaviour
         tileMap = this.GetComponent<Tilemap>();
         grid = tileMap.layoutGrid;
         GenerateMap();
+        Debug.Log("Loop cycles: " + cycles);
+        Debug.Log("Tiles placed: " + tiles);
     }
 
-    void Update()//TODO delete
-    {
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            GenerateMap();
-        }
-    }
+    //void Update()//TODO delete
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Delete))
+    //    {
+    //        GenerateMap();
+    //    }
+    //}
 
     void GenerateMap()
     {
@@ -58,8 +64,6 @@ public class MapGenerator : MonoBehaviour
         Debug.Log("Loop cycles: " + iterations);
         Debug.Log("Tiles placed:" + tiles);
     }
-
-    private string seed;
 
     void RandomFillMap()
     {
@@ -86,7 +90,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     intMap[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? 1 : 0;
                 }
-                iterations++;
+                cycles++;
             }
         }
     }
@@ -103,7 +107,7 @@ public class MapGenerator : MonoBehaviour
                     intMap[x, y] = 1;
                 else if (neighbourWallTiles < 4)
                     intMap[x, y] = 0;
-                iterations++;
+                cycles++;
             }
         }
     }
@@ -126,7 +130,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     wallCount++;
                 }
-                iterations++;
+                cycles++;
             }
         }
 
@@ -144,7 +148,11 @@ public class MapGenerator : MonoBehaviour
 
                     if(intMap[x,y] > 0)
                     {
+<<<<<<< HEAD
                         iterations++;
+=======
+                        cycles++;
+>>>>>>> ecc063c7daf3da6bccb8bd7fcdbe77077acdc953
                         tiles++;
                         tileMap.SetTile(new Vector3Int(x-(width/2), -y, 0), fillTile);
                     }
