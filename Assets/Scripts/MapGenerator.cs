@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+//helper classes for editor-accessible nested lists
 [System.Serializable]
 public class Layer
 {
@@ -24,10 +24,10 @@ public class MapGenerator : MonoBehaviour
     public string customSeed;
 
     [Range(0, 100)]
-    public int randomFillPercent = 50;
+    public int randomFillPercent = 50;//percentage of empty space that should be filled
 
     [Range(0, 10)]
-    public int smoothingIterations = 5;
+    public int smoothingIterations = 5;//how many times the generator smooths the tiles
 
     [SerializeField]
     public LayerList fillTiles;
@@ -61,8 +61,6 @@ public class MapGenerator : MonoBehaviour
             SmoothMap();
         }
 
-        //todo ores pass?
-
         PopulateTileMap();
     }
 
@@ -85,7 +83,7 @@ public class MapGenerator : MonoBehaviour
             {
                 if (x == 0 || x == width - 1 || y == 0 || y == depth - 1)
                 {
-                    intMap[x, y] = 1;//TODO use higher value for ores and unbreakables
+                    intMap[x, y] = 1;
                 }
                 else
                 {
@@ -102,8 +100,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < depth; y++)
             {
-                int neighbourWallTiles = TileSurvey(x, y).surroundingTiles;
-                //todo support for ore
+                int neighbourWallTiles = GetSurroundingTileCount(x, y);
                 if (neighbourWallTiles > 4)
                     intMap[x, y] = 1;
                 else if (neighbourWallTiles < 4)
@@ -113,13 +110,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    struct TileSurveyData
-    {
-        public int tileNum;
-        public int surroundingTiles;
-    }
-
-    TileSurveyData TileSurvey(int gridX, int gridY)
+    int GetSurroundingTileCount(int gridX, int gridY)
     {
         int wallCount = 0;
         for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++)
@@ -140,10 +131,7 @@ public class MapGenerator : MonoBehaviour
                 cycles++;
             }
         }
-        TileSurveyData data = new TileSurveyData();
-        data.surroundingTiles = wallCount;
-        data.tileNum = intMap[gridX, gridY];
-        return data;
+        return wallCount;
     }
 
     void PopulateTileMap()
@@ -170,8 +158,7 @@ public class MapGenerator : MonoBehaviour
                     {
                         cycles++;
                         tiles++;
-
-
+                        
                         tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[GetRandomWeightedIndex(weights)]);
                     }
                 }
