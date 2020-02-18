@@ -24,11 +24,9 @@ public class MapGenerator : MonoBehaviour
     private string seed;
     private int[,] intMap;
 
-<<<<<<< HEAD
-    int iterations = 0;
-=======
+
     int cycles = 0;
->>>>>>> ecc063c7daf3da6bccb8bd7fcdbe77077acdc953
+
     int tiles = 0;
 
     void Start()
@@ -39,14 +37,6 @@ public class MapGenerator : MonoBehaviour
         Debug.Log("Loop cycles: " + cycles);
         Debug.Log("Tiles placed: " + tiles);
     }
-
-    //void Update()//TODO delete
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Delete))
-    //    {
-    //        GenerateMap();
-    //    }
-    //}
 
     void GenerateMap()
     {
@@ -61,8 +51,6 @@ public class MapGenerator : MonoBehaviour
         //todo ores pass?
 
         PopulateTileMap();
-        Debug.Log("Loop cycles: " + iterations);
-        Debug.Log("Tiles placed:" + tiles);
     }
 
     void RandomFillMap()
@@ -148,11 +136,7 @@ public class MapGenerator : MonoBehaviour
 
                     if(intMap[x,y] > 0)
                     {
-<<<<<<< HEAD
-                        iterations++;
-=======
                         cycles++;
->>>>>>> ecc063c7daf3da6bccb8bd7fcdbe77077acdc953
                         tiles++;
                         tileMap.SetTile(new Vector3Int(x-(width/2), -y, 0), fillTile);
                     }
