@@ -94,6 +94,8 @@ public class MapGenerator : MonoBehaviour
                 {
                     intMap[x, y] = (pseudoRandom.Next(0, 100) < randomFillPercent) ? 1 : 0;
                 }
+
+                //iterate debug var
                 cycles++;
             }
         }
@@ -110,6 +112,8 @@ public class MapGenerator : MonoBehaviour
                     intMap[x, y] = 1;
                 else if (neighbourWallTiles < 4)
                     intMap[x, y] = 0;
+
+                //iterate debug var
                 cycles++;
             }
         }
@@ -134,6 +138,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     wallCount++;
                 }
+                //iterate debug var
                 cycles++;
             }
         }
@@ -162,6 +167,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     if (intMap[x, y] > 0)
                     {
+                        //iterate debug vars
                         cycles++;
                         tiles++;
                         
@@ -229,5 +235,3 @@ public class MapGenerator : MonoBehaviour
         return 0;
     }
 }
-
-

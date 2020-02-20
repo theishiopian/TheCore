@@ -32,6 +32,11 @@ public class DestructionTest : MonoBehaviour
             {
                 Grid grid = tiles.layoutGrid;
                 Vector3Int gridPos = grid.WorldToCell(hit.point);
+
+                TileTerrain tile = (TileTerrain)tiles.GetTile(gridPos);
+
+                Debug.Log(tile.hardness);
+
                 tiles.SetTile(gridPos, null);
             }
         }
