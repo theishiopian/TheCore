@@ -35,6 +35,8 @@ public class TileTerrain : TileBase
         AssetDatabase.CreateAsset(CreateInstance<TileTerrain>(), path);
     }
 #endif
+
+#region TileEditor Class
     [CustomEditor(typeof(TileTerrain))]
     public class TileEditor : Editor
     {
@@ -50,5 +52,5 @@ public class TileTerrain : TileBase
             return cache;
         }
     }
-
+#endregion
 }
