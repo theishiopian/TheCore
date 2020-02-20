@@ -47,9 +47,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        body.position += new Vector2(x, 0);
+        if(digProgress == 0)body.position += new Vector2(x, 0);
 
-        if (jump)
+        if (jump && digProgress == 0)
         {
             body.AddForce(new Vector2(0, 20), ForceMode2D.Force);
         }
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
                     digDir.y = 0;
                 }
 
-                RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 0.3f, digDir, 1.0f);
+                RaycastHit2D hit = Physics2D.CircleCast(this.transform.position, 0.3f, digDir, 0.35f);
 
                 if (hit.collider.CompareTag("Blocks"))
                 {
