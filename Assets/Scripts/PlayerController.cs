@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
     public float castDistance;
     public float maxCameraSpeed;
     public Tilemap tiles;
+    public ParticleSystem digParticles;
 
     private Rigidbody2D body;
     private new Camera camera;
     private Grid grid;
+    private ParticleSystem.EmissionModule digEmit;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
         body = this.GetComponent<Rigidbody2D>();
         camera = Camera.main;
         grid = tiles.layoutGrid;
+        digEmit = digParticles.emission;
     }
 
     float x;
@@ -38,8 +41,6 @@ public class PlayerController : MonoBehaviour
             jump = false;
         }
     }
-
-    public ParticleSystem digParticles;
 
     Vector2 digDir;
     float digProgress = 0;
@@ -86,25 +87,25 @@ public class PlayerController : MonoBehaviour
                     if(!(gridPos.x >= 7 || gridPos.x < -7))
                     {
                         if(tile.hardness <=1)digProgress += Time.deltaTime;
-                        digParticles.emissionRate = 5;
+                        digEmit.rateOverTime = 5;
                         if (digProgress >= 1)
                         {
                             tiles.SetTile(gridPos, null);
                             digProgress = 0;
-                            digParticles.emissionRate = 0;
+                            digEmit.rateOverTime = 0;
                         }
                     }
                 }
-                
             }
-            catch(System.NullReferenceException n)
+            catch//(System.NullReferenceException n)
             {
                 //Debug.Log("drill hit air");
             }
         }
         else
         {
-            digParticles.emissionRate = 0;
+            digProgress = 0;
+            digEmit.rateOverTime = 0;
         }
     }
 }
