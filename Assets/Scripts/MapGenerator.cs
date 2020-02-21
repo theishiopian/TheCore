@@ -154,13 +154,13 @@ public class MapGenerator : MonoBehaviour
         int currentLayer = 1;
         if (intMap != null)
         {
-            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);//generate inital weights
+            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 10);//generate inital weights
             for (int y = 0; y < depth; y++)
             {
                 if ((y / currentLayer) == layerDepth)//if at layer transition
                 {
                     currentLayer++;
-                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 5);//regenerate weights for next layer
+                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 10);//regenerate weights for next layer
                 }
 
                 for (int x = 0; x < width; x++)

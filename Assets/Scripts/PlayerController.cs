@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
                         digEmit.rateOverTime = 5;
                         if (digProgress >= 1)
                         {
+                            if(tile.dropItem != null)Instantiate(tile.dropItem, particlePos, Quaternion.identity);
                             tiles.SetTile(gridPos, null);
                             digProgress = 0;
                             digEmit.rateOverTime = 0;
