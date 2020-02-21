@@ -23,6 +23,14 @@ public class PlayerController : MonoBehaviour
         digEmit = digParticles.emission;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.CompareTag("Item"))
+        {
+            Destroy(collision.collider.gameObject);
+        }
+    }
+
     float x;
     float y;
     float cameraVelocity;
@@ -45,7 +53,7 @@ public class PlayerController : MonoBehaviour
     Vector2 digDir;
     float digProgress = 0;
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if(digProgress == 0)body.position += new Vector2(x, 0);
 
