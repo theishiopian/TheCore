@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
-    public float castDistance;
     public float maxCameraSpeed;
     public Tilemap tiles;
     public ParticleSystem digParticles;
@@ -91,8 +90,6 @@ public class PlayerController : MonoBehaviour
                     digParticles.transform.position = particlePos;
 
                     TileTerrain tile = (TileTerrain)tiles.GetTile(gridPos);
-
-                    //Debug.Log(gridPos);
 
                     if(!(gridPos.x >= 7 || gridPos.x < -7))
                     {
