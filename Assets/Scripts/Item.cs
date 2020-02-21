@@ -2,6 +2,8 @@
 
 public class Item : MonoBehaviour
 {
+    public int value;
+
     public AnimationCurve bounce;
     public float offset = 0.125f;
 
