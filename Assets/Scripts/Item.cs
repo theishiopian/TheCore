@@ -26,6 +26,6 @@ public class Item : MonoBehaviour
     {
         t += Time.deltaTime;
         t = Mathf.Repeat(t, 1);
-        sprite.localPosition = new Vector3(0, bounce.Evaluate(t), 0) * 0.125f;
+        sprite.localPosition = new Vector3(0, bounce.Evaluate(t), 0) * offset;
     }
 }
