@@ -41,15 +41,25 @@ public class MapGenerator : MonoBehaviour
     int cycles = 0;
     int tiles = 0;
 
+    int[] oreCount;
+
     void Start()
     {
         //cache stuff
         tileMap = this.GetComponent<Tilemap>();
         grid = tileMap.layoutGrid;
+
+        oreCount = new int[fillTiles.list.Count];
+
         //do the thing
         GenerateMap();
         Debug.Log("Loop cycles: " + cycles);
         Debug.Log("Tiles placed: " + tiles);
+        
+        foreach(int i in oreCount)
+        {
+            Debug.Log(i);
+        }
     }
 
     void GenerateMap()
@@ -170,9 +180,13 @@ public class MapGenerator : MonoBehaviour
                         //iterate debug vars
                         cycles++;
                         tiles++;
-                        
+
                         //place tile
-                        tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[GetRandomWeightedIndex(weights)]);
+                        int tile = GetRandomWeightedIndex(weights);
+
+                        if(tile > 0)oreCount[currentLayer - 1]++;
+
+                        tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
                     }
                 }
             }
