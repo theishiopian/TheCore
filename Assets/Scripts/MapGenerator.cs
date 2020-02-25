@@ -42,9 +42,11 @@ public class MapGenerator : MonoBehaviour
     int tiles = 0;
 
     int[] oreCount;
+    int layerCount;
 
     void Start()
     {
+        layerCount = fillTiles.list.Count;
         //cache stuff
         tileMap = this.GetComponent<Tilemap>();
         grid = tileMap.layoutGrid;
@@ -55,10 +57,21 @@ public class MapGenerator : MonoBehaviour
         GenerateMap();
         Debug.Log("Loop cycles: " + cycles);
         Debug.Log("Tiles placed: " + tiles);
-        
-        foreach(int i in oreCount)
+
+        GlobalVars.LevelTops = new int[layerCount];
+
+        for(int i = 0; i != layerCount; i++)
         {
-            Debug.Log(i);
+            Debug.Log(oreCount[i]);
+
+            if(oreCount[i] > 0)
+            {
+                GlobalVars.LevelTops[i] = oreCount[i] / 2;
+            }
+            else
+            {
+                GlobalVars.LevelTops[i] = int.MaxValue;
+            }
         }
     }
 
