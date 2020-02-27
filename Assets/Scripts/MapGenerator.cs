@@ -32,6 +32,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public LayerList fillTiles;//the tiles to generate, organized by layer. the first tile in each layyer is the fill tile, the rest are ores
 
+    public GameObject endRoomPrefab;
+
     private Tilemap tileMap;//cache to store the output tilemap
     private Grid grid;//cache to store output tilemap alignment grid
     private string seed;//seed for rng
@@ -208,6 +210,8 @@ public class MapGenerator : MonoBehaviour
                     }
                 }
             }
+
+            Instantiate(endRoomPrefab, new Vector3(0, -depth, 0), Quaternion.identity);
         }
     }
 
