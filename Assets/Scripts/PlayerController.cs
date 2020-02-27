@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
             
             int value = collision.collider.gameObject.GetComponent<Item>().value;
             GlobalVars.xp += value;
-            //Debug.Log("Added " + value);
+            Debug.Log("Added " + value);
             Destroy(collision.collider.gameObject);
 
             if(GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])

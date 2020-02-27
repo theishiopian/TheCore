@@ -62,11 +62,11 @@ public class MapGenerator : MonoBehaviour
 
         for(int i = 0; i != layerCount; i++)
         {
-            //Debug.Log(oreCount[i]);
+            Debug.Log(oreCount[i]);
 
             if(oreCount[i] > 0)
             {
-                GlobalVars.LevelUpThresholds[i] = oreCount[i] / 2;
+                GlobalVars.LevelUpThresholds[i] = (oreCount[i] / 2) * (i + 1);
             }
             else
             {
