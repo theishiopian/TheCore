@@ -5,20 +5,24 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public float maxCameraSpeed;
-    public Tilemap tiles;
+    
     public ParticleSystem digParticles;
 
+    private Grid grid;
+    private Tilemap stoneMap;
+    private Tilemap oreMap;
     private Rigidbody2D body;
     private new Camera camera;
-    private Grid grid;
     private ParticleSystem.EmissionModule digEmit;
 
     // Start is called before the first frame update
     void Start()
     {
+        grid = GlobalVars.GetObject("grid").GetComponent<Grid>();
+        stoneMap = GlobalVars.GetObject("stone_map").GetComponent<Tilemap>();
+        oreMap = GlobalVars.GetObject("ore_map").GetComponent<Tilemap>();
         body = this.GetComponent<Rigidbody2D>();
         camera = Camera.main;
-        grid = tiles.layoutGrid;
         digEmit = digParticles.emission;
     }
 
@@ -96,18 +100,21 @@ public class PlayerController : MonoBehaviour
                     Vector2 particlePos = new Vector2(gridPos.x + 0.5f, gridPos.y + 0.5f);
                     digParticles.transform.position = particlePos;
 
-                    TileTerrain tile = (TileTerrain)tiles.GetTile(gridPos);
+                    TileTerrain stone = (TileTerrain)stoneMap.GetTile(gridPos);
+                    TileTerrain ore = (TileTerrain)oreMap.GetTile(gridPos);
 
                     if(!(gridPos.x >= 7 || gridPos.x < -7))
                     {
-                        if(tile.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
+                        if(stone.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
                         digEmit.rateOverTime = 5;
                         if (digProgress >= 1)
                         {
-                            if(tile.dropItem != null)Instantiate(tile.dropItem, particlePos, Quaternion.identity);
-                            tiles.SetTile(gridPos, null);
+                            stoneMap.SetTile(gridPos, null);
+                            oreMap.SetTile(gridPos, null);
                             digProgress = 0;
                             digEmit.rateOverTime = 0;
+                            Debug.Log(ore.dropItem);
+                            if (ore.dropItem != null) Instantiate(ore.dropItem, particlePos, Quaternion.identity);
                         }
                     }
                 }
