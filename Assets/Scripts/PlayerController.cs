@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     float x;
     float y;
     float cameraVelocity;
-    bool jump = false;
+    bool rocket = false;
 
     private void Update()
     {
@@ -55,11 +55,11 @@ public class PlayerController : MonoBehaviour
         y = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         if(Input.GetKey(KeyCode.Space))
         {
-            jump = true;
+            rocket = true;
         }
         else
         {
-            jump = false;
+            rocket = false;
         }
     }
 
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if(digProgress == 0)body.position += new Vector2(x, 0);
 
-        if (jump && digProgress == 0)
+        if (rocket && digProgress == 0)
         {
             body.AddForce(new Vector2(0, 20), ForceMode2D.Force);
         }
@@ -78,12 +78,12 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < 0)
         {
             var y = Mathf.SmoothDamp(camera.transform.position.y, this.transform.position.y, ref cameraVelocity, Time.deltaTime, maxCameraSpeed);
-            camera.transform.position = new Vector3(2, y, -10);
+            camera.transform.position = new Vector3(1.75f, y, -10);
         }
 
         digDir = new Vector2(x,y).normalized;
         
-        if(digDir.magnitude > 0 && !jump)
+        if(digDir.magnitude > 0 && !rocket)
         {
             try
             {

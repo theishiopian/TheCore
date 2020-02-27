@@ -109,7 +109,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < depth; y++)
             {
-                if (x == 0 || x == width - 1 || y == 0 || y == depth - 1)
+                if (IsXYOnEdge(x,y))
                 {
                     intMap[x, y] = 1;
                 }
@@ -168,6 +168,11 @@ public class MapGenerator : MonoBehaviour
         return wallCount;
     }
 
+    private bool IsXYOnEdge(int x, int y)
+    {
+        return (x == 0 || x == width - 1 || y == 0 || y == depth - 1);
+    }
+
     //meat and potatoes. this is where the tiles themselves are placed
     void PopulateTileMap()
     {
@@ -195,7 +200,7 @@ public class MapGenerator : MonoBehaviour
                         tiles++;
 
                         //place tile
-                        int tile = GetRandomWeightedIndex(weights);
+                        int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
 
                         if(tile > 0)oreCount[currentLayer - 1]++;
 
