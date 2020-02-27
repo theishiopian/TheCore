@@ -62,7 +62,7 @@ public class MapGenerator : MonoBehaviour
 
         for(int i = 0; i != layerCount; i++)
         {
-            Debug.Log(oreCount[i]);
+            //Debug.Log(oreCount[i]);
 
             if(oreCount[i] > 0)
             {
