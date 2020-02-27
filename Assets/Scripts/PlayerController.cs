@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.collider.CompareTag("Item"))
         {
-            //TODO: xp system
-            
             int value = collision.collider.gameObject.GetComponent<Item>().value;
             GlobalVars.xp += value;
             Debug.Log("Added " + value);

@@ -32,19 +32,18 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     public LayerList fillTiles;//the tiles to generate, organized by layer. the first tile in each layyer is the fill tile, the rest are ores
 
-    public GameObject endRoomPrefab;
+    public GameObject endRoomPrefab;//the end of the map, generates at the bottom
 
     private Tilemap tileMap;//cache to store the output tilemap
     private Grid grid;//cache to store output tilemap alignment grid
     private string seed;//seed for rng
     private int[,] intMap;//storage for initial map shape
+    private int[] oreCount;
+    private int layerCount;
 
     //debug log variables
     int cycles = 0;
     int tiles = 0;
-
-    int[] oreCount;
-    int layerCount;
 
     void Start()
     {
@@ -170,12 +169,14 @@ public class MapGenerator : MonoBehaviour
         return wallCount;
     }
 
+    //helper method to determine whether or not a tile is on the edge of the map
     private bool IsXYOnEdge(int x, int y)
     {
         return (x == 0 || x == width - 1 || y == 0 || y == depth - 1);
     }
 
     //meat and potatoes. this is where the tiles themselves are placed
+    //the intMap is used to define the shape of the map
     void PopulateTileMap()
     {
         int layers = fillTiles.list.Count;
@@ -215,7 +216,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    //helper method for making list of weights
+    //helper method for making list of weights for ore generation
     private float[] generateWeights(int size)
     {
         int increment = 10;
