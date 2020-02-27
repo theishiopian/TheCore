@@ -17,8 +17,8 @@ public class LayerList
 
 public class MapGenerator : MonoBehaviour
 {
-    public int width;
-    public int depth;
+    public int width;//width of generated map
+    public int depth;//depth of generated map
 
     public bool useRandomSeed = true;
     public string customSeed;
@@ -68,7 +68,7 @@ public class MapGenerator : MonoBehaviour
 
             if(oreCount[i] > 0)
             {
-                GlobalVars.LevelUpThresholds[i] = (oreCount[i] / 2) * (i + 1);
+                GlobalVars.LevelUpThresholds[i] = ((oreCount[i] / 4)*3) * (i + 1);
             }
             else
             {
@@ -184,13 +184,13 @@ public class MapGenerator : MonoBehaviour
         int currentLayer = 1;
         if (intMap != null)
         {
-            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 10);//generate inital weights
+            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);//generate inital weights
             for (int y = 0; y < depth; y++)
             {
                 if ((y / currentLayer) == layerDepth)//if at layer transition
                 {
                     currentLayer++;
-                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count, 10);//regenerate weights for next layer
+                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);//regenerate weights for next layer
                 }
 
                 for (int x = 0; x < width; x++)
@@ -204,7 +204,7 @@ public class MapGenerator : MonoBehaviour
                         //place tile
                         int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
 
-                        if(tile > 0)oreCount[currentLayer - 1]++;
+                        if(tile == 1)oreCount[currentLayer - 1]++;
 
                         tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
                     }
@@ -216,8 +216,10 @@ public class MapGenerator : MonoBehaviour
     }
 
     //helper method for making list of weights
-    private float[] generateWeights(int size, int increment)
+    private float[] generateWeights(int size)
     {
+        int increment = 10;
+
         float[] weights = new float[size];
 
         float total = 100;
@@ -227,6 +229,7 @@ public class MapGenerator : MonoBehaviour
             total -= increment;
 
             weights[i] = increment;
+            increment = increment == 0 ? 1 : increment/2;
         }
 
         weights[0] = total;
