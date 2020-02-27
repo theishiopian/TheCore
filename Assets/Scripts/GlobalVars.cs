@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class GlobalVars
+﻿public static class GlobalVars
 {
-    public static int[] LevelTops;//init in world generation
+    public static int[] LevelUpThresholds;//init in world generation
+
+    public static int level = 0;
+
+    public static int xp = 0;
 }

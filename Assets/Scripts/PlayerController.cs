@@ -13,9 +13,6 @@ public class PlayerController : MonoBehaviour
     private Grid grid;
     private ParticleSystem.EmissionModule digEmit;
 
-    int xp = 0;
-    int level = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -32,14 +29,14 @@ public class PlayerController : MonoBehaviour
             //TODO: xp system
             
             int value = collision.collider.gameObject.GetComponent<Item>().value;
-            xp += value;
+            GlobalVars.xp += value;
             Debug.Log("Added " + value);
             Destroy(collision.collider.gameObject);
 
-            if(xp >= GlobalVars.LevelTops[level])
+            if(GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])
             {
-                level++;
-                xp = 0;
+                GlobalVars.level++;
+                GlobalVars.xp = 0;
             }
         }
     }
@@ -105,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
                     if(!(gridPos.x >= 7 || gridPos.x < -7))
                     {
-                        if(tile.hardness <=(level+1))digProgress += Time.deltaTime;
+                        if(tile.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
                         digEmit.rateOverTime = 5;
                         if (digProgress >= 1)
                         {

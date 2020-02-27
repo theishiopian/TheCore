@@ -58,7 +58,7 @@ public class MapGenerator : MonoBehaviour
         Debug.Log("Loop cycles: " + cycles);
         Debug.Log("Tiles placed: " + tiles);
 
-        GlobalVars.LevelTops = new int[layerCount];
+        GlobalVars.LevelUpThresholds = new int[layerCount];
 
         for(int i = 0; i != layerCount; i++)
         {
@@ -66,11 +66,11 @@ public class MapGenerator : MonoBehaviour
 
             if(oreCount[i] > 0)
             {
-                GlobalVars.LevelTops[i] = oreCount[i] / 2;
+                GlobalVars.LevelUpThresholds[i] = oreCount[i] / 2;
             }
             else
             {
-                GlobalVars.LevelTops[i] = int.MaxValue;
+                GlobalVars.LevelUpThresholds[i] = int.MaxValue;
             }
         }
     }
