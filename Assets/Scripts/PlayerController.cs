@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < 0)
         {
             var y = Mathf.SmoothDamp(camera.transform.position.y, this.transform.position.y, ref cameraVelocity, Time.deltaTime, maxCameraSpeed);
-            camera.transform.position = new Vector3(0, y, -10);
+            camera.transform.position = new Vector3(2, y, -10);
         }
 
         digDir = new Vector2(x,y).normalized;
