@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if(stone.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
                         digEmit.rateOverTime = 5;
-                        if (digProgress >= 1)
+                        if (digProgress >= 0.6f)
                         {
                             stoneMap.SetTile(gridPos, null);
                             oreMap.SetTile(gridPos, null);
