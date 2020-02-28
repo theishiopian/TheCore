@@ -17,8 +17,6 @@ public class LayerList
 
 public class MapGenerator : MonoBehaviour
 {
-    
-
     public int width;//width of generated map
     public int depth;//depth of generated map
 

@@ -52,14 +52,8 @@ public class PlayerController : MonoBehaviour
     {
         x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         y = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        if(Input.GetKey(KeyCode.Space))
-        {
-            rocket = true;
-        }
-        else
-        {
-            rocket = false;
-        }
+
+        rocket = Input.GetKey(KeyCode.Space) ? true : false;
     }
 
     Vector2 digDir;
