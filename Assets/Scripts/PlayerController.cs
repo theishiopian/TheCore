@@ -100,8 +100,8 @@ public class PlayerController : MonoBehaviour
                     Vector2 particlePos = new Vector2(gridPos.x + 0.5f, gridPos.y + 0.5f);
                     digParticles.transform.position = particlePos;
 
-                    TileTerrain stone = (TileTerrain)stoneMap.GetTile(gridPos);
-                    TileTerrain ore = (TileTerrain)oreMap.GetTile(gridPos);
+                    StoneTile stone = (StoneTile)stoneMap.GetTile(gridPos);
+                    OreTile ore = (OreTile)oreMap.GetTile(gridPos);
 
                     if(!(gridPos.x >= 7 || gridPos.x < -7))
                     {
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
                             oreMap.SetTile(gridPos, null);
                             digProgress = 0;
                             digEmit.rateOverTime = 0;
-                            Debug.Log(ore.dropItem);
+                            //Debug.Log(ore.dropItem);
                             if (ore.dropItem != null) Instantiate(ore.dropItem, particlePos, Quaternion.identity);
                         }
                     }

@@ -5504,11 +5504,11 @@ MonoBehaviour:
     list:
     - list:
       - {fileID: 11400000, guid: 82a448882bb62574a99f341f0283c618, type: 2}
-      - {fileID: 11400000, guid: 930cd7e74775b6c47b50cddafa65f6fb, type: 2}
-      - {fileID: 11400000, guid: 6c6a868b06a227f4a94f324a168fa689, type: 2}
+      - {fileID: 11400000, guid: 5969a6f31e43e7d4291aca6d912cdeb0, type: 2}
+      - {fileID: 11400000, guid: fb4c92a5e3fb41e45959c74863a7d52c, type: 2}
     - list:
       - {fileID: 11400000, guid: edf85c601c408c0419f6514578f5a254, type: 2}
-      - {fileID: 11400000, guid: 6c6a868b06a227f4a94f324a168fa689, type: 2}
+      - {fileID: 11400000, guid: fb4c92a5e3fb41e45959c74863a7d52c, type: 2}
     - list:
       - {fileID: 11400000, guid: e1f40141bd0d85044b4d14ac81404ad8, type: 2}
     - list:
@@ -6322,7 +6322,7 @@ GameObject:
   - component: {fileID: 2132564894}
   - component: {fileID: 2132564895}
   m_Layer: 0
-  m_Name: Blocks
+  m_Name: Stone
   m_TagString: Blocks
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
