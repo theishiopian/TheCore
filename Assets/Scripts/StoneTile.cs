@@ -3,16 +3,13 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEngine.Tilemaps.Tile;
 
-public class TileTerrain : TileBase
+public class StoneTile : TileBase
 {
     [SerializeField]
     public Sprite sprite;//sprite to render on this tile
 
     [SerializeField]
     public int hardness;//how hard this tile is. if the drill's level is less than this vale, the tile is unbreakable
-
-    [SerializeField]
-    public GameObject dropItem;//what the tile should spawn when it is destroyed. this will be done in the drill code itself
     
     //an override method is one that replaces a method in the base class
     //this class extends the TileBase class, which has its own GetTileData method
@@ -32,15 +29,15 @@ public class TileTerrain : TileBase
     #if UNITY_EDITOR
     //this method creates a file in the assets folder that can be used to quickly reference this custom tile
     //the MenuItem label allows this code to be called from the editor itself through the dropdown menus
-    [MenuItem("Assets/Create/Terrain Tile")]
+    [MenuItem("Assets/Create/Stone Tile")]
     public static void CreateAnimatedTile()
     {
         //this part opens a save panel
-        string path = EditorUtility.SaveFilePanelInProject("Save Terrain Tile", "New Terrain Tile", "asset", "Save Terrain Tile", "Assets");
+        string path = EditorUtility.SaveFilePanelInProject("Save Stone Tile", "New Stone Tile", "asset", "Save Stone Tile", "Assets");
         if (path == "")
             return;//dont let you save to a null path
 
-        AssetDatabase.CreateAsset(CreateInstance<TileTerrain>(), path);//create the asset file at the specified location
+        AssetDatabase.CreateAsset(CreateInstance<StoneTile>(), path);//create the asset file at the specified location
     }
     #endif
 
@@ -49,8 +46,8 @@ public class TileTerrain : TileBase
     //fun fact! you can have a class inside of a class! a class is just a definition for an object.
     //in this case the object being defined is an editor interface for the custom tile type. as such, it makes sense to define it here
     //this class could also be defined in its own file as well.
-    [CustomEditor(typeof(TileTerrain))]
-    public class TileEditor : Editor
+    [CustomEditor(typeof(StoneTile))]
+    public class StoneTileEditor : Editor
     {
         //another override. this one is overriding the method used to display an icon in the assets folder
         //i want the tile's texture to be visible from the assets folder for ease of use.
@@ -58,7 +55,7 @@ public class TileTerrain : TileBase
         //the normal method in the "Editor" class just returns a boring generic icon.
         public override Texture2D RenderStaticPreview(string assetPath, UnityEngine.Object[] subAssets, int width, int height)
         {
-            TileTerrain tile = target as TileTerrain;
+            StoneTile tile = target as StoneTile;
 
             if (tile == null || tile.sprite == null)
                 return null;//use the default icon if no custom one is available

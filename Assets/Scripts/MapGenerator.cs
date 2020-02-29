@@ -34,8 +34,10 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject endRoomPrefab;//the end of the map, generates at the bottom
 
-    private Tilemap tileMap;//cache to store the output tilemap
+    private Tilemap stoneMap;//cache to store the output tilemap
+    private Tilemap oreMap;
     private Grid grid;//cache to store output tilemap alignment grid
+
     private string seed;//seed for rng
     private int[,] intMap;//storage for initial map shape
     private int[] oreCount;
@@ -47,10 +49,11 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
+        grid = GlobalVars.GetObject("grid").GetComponent<Grid>();
+        stoneMap = GlobalVars.GetObject("stone_map").GetComponent<Tilemap>();
+        oreMap = GlobalVars.GetObject("ore_map").GetComponent<Tilemap>();
         layerCount = fillTiles.list.Count;
         //cache stuff
-        tileMap = this.GetComponent<Tilemap>();
-        grid = tileMap.layoutGrid;
 
         oreCount = new int[fillTiles.list.Count];
 
@@ -89,7 +92,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         //generate actual tiles
-        PopulateTileMap();
+        PopulateTileMaps();
     }
 
     //fill map with random squares
@@ -177,7 +180,7 @@ public class MapGenerator : MonoBehaviour
 
     //meat and potatoes. this is where the tiles themselves are placed
     //the intMap is used to define the shape of the map
-    void PopulateTileMap()
+    void PopulateTileMaps()
     {
         int layers = fillTiles.list.Count;
         int layerDepth = depth / layers;
@@ -205,9 +208,16 @@ public class MapGenerator : MonoBehaviour
                         //place tile
                         int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
 
-                        if(tile == 1)oreCount[currentLayer - 1]++;
+                        //if(tile == 1)oreCount[currentLayer - 1]++;
 
-                        tileMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
+                        //stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
+
+                        if(tile > 0)
+                        {
+                            oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
+                            if (tile == 1) oreCount[currentLayer - 1]++;
+                        }
+                        stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[0]);
                     }
                 }
             }
