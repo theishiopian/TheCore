@@ -20,6 +20,7 @@ public class GUIManager : MonoBehaviour
     void Update()
     {
         levelText.text = "Drill Power: " + (GlobalVars.level + 1);
+
         xpText.text = "Current XP: " + GlobalVars.xp + "/" + GlobalVars.LevelUpThresholds[GlobalVars.level];
         float y = player.transform.position.y;
         depth = y < 1.4f ? (-Mathf.RoundToInt(y)+1) + "m" : "Sea Level";
