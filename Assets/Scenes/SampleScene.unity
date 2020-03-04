@@ -5509,13 +5509,21 @@ MonoBehaviour:
       - {fileID: 11400000, guid: fb4c92a5e3fb41e45959c74863a7d52c, type: 2}
     - list:
       - {fileID: 11400000, guid: edf85c601c408c0419f6514578f5a254, type: 2}
-      - {fileID: 11400000, guid: fb4c92a5e3fb41e45959c74863a7d52c, type: 2}
+      - {fileID: 11400000, guid: 302a35aeeb357ee40909048f1719ecf9, type: 2}
+      - {fileID: 11400000, guid: 63f702ba9b254ae48a298822faca3361, type: 2}
     - list:
       - {fileID: 11400000, guid: e1f40141bd0d85044b4d14ac81404ad8, type: 2}
+      - {fileID: 11400000, guid: cc3e711d543dc8f4b9e9204a271eeb33, type: 2}
+      - {fileID: 11400000, guid: 5b9e3b0263892f04195389cc339989f3, type: 2}
     - list:
       - {fileID: 11400000, guid: 685c7c23f4500cd46ac03d4af24f75b3, type: 2}
+      - {fileID: 11400000, guid: 2c768aa2fb1a86f489bad1f1870e7791, type: 2}
+      - {fileID: 11400000, guid: 9fa38c0fb09e3e24fa62809586df1efb, type: 2}
+      - {fileID: 11400000, guid: 2d8be754f5088474cb8ca128d48b96d4, type: 2}
+      - {fileID: 11400000, guid: 29d80c039593267499a947ef9ce8c675, type: 2}
     - list:
       - {fileID: 11400000, guid: a1a6eba54d1aa904e9f174fc444f2258, type: 2}
+      - {fileID: 11400000, guid: fe358c35df93cdd4c859f476a0ab8c53, type: 2}
   endRoomPrefab: {fileID: 3512988625641340768, guid: aa9a1b7d2befde6468344b4b84aa70a2,
     type: 3}
 --- !u!114 &759523988

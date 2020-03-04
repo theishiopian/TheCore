@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2551b9d2e0e5aa429a7eb5ba28ce3ff, type: 3}
-  m_Name: coal_ore
+  m_Name: gold_ore
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 909b8004b8861ce42bbb11d0b9563811, type: 3}
-  dropItem: {fileID: 996122466770115454, guid: fb445def6bb65a64f8dcb44242e6751e, type: 3}
+  sprite: {fileID: 21300000, guid: 35768584dc5f4ed4e93661dea40aca9c, type: 3}
+  dropItem: {fileID: 996122466770115454, guid: c1b81c3e6892675448834d57f847b662, type: 3}

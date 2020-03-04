@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 996122466770115442}
   - component: {fileID: 996122466770115445}
   m_Layer: 0
-  m_Name: Junk
+  m_Name: Saphire
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a53ace14e2fd44bb31a20f4c1c5f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 2
+  value: 8
   bounce:
     serializedVersion: 2
     m_Curve:
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bd331910288565949aac98c8c0323327, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a3c7c83577cc324397a0afca3ba576f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1

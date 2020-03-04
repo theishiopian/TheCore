@@ -66,14 +66,18 @@ public class MapGenerator : MonoBehaviour
 
         for(int i = 0; i != layerCount; i++)
         {
-            Debug.Log(oreCount[i]);
+            //Debug.Log(oreCount[i]);
 
             if(oreCount[i] > 0)
             {
-                GlobalVars.LevelUpThresholds[i] = ((oreCount[i] / 4)*3) * (i + 1);
+                var l = ((oreCount[i] / 4) * 3) * (i + 1);
+                
+                GlobalVars.LevelUpThresholds[i] = l;
+                Debug.Log(oreCount[i] + " " + l);
             }
             else
             {
+                Debug.Log("level up for level " + (i+1) + " is infinite");
                 GlobalVars.LevelUpThresholds[i] = int.MaxValue;
             }
         }
@@ -212,12 +216,16 @@ public class MapGenerator : MonoBehaviour
 
                         //stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
 
-                        if(tile > 0)
+                        TileBase currentTile = fillTiles.list[currentLayer - 1].list[tile];
+                        TileBase initialTile = fillTiles.list[currentLayer - 1].list[0];
+                        if (currentTile.GetType() == typeof(OreTile))
                         {
-                            oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
+                            oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
                             if (tile == 1) oreCount[currentLayer - 1]++;
+                            stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), initialTile);
                         }
-                        stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[0]);
+                        else
+                            stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
                     }
                 }
             }
@@ -229,7 +237,7 @@ public class MapGenerator : MonoBehaviour
     //helper method for making list of weights for ore generation
     private float[] generateWeights(int size)
     {
-        int increment = 10;
+        int increment = 20;
 
         float[] weights = new float[size];
 
