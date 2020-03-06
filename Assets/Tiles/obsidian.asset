@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4dde7c3c8d27449bb112d3fd949164, type: 3}
   m_Name: obsidian
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: a383acf2243bb0847bb2cd79e7edfb13, type: 3}
+  sprite: {fileID: 21300000, guid: cd402543349d63040baccbfb04d45566, type: 3}
   hardness: 9999999

@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4dde7c3c8d27449bb112d3fd949164, type: 3}
   m_Name: magma
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: ec19ec9e3ba47a24cb21901f9f382b11, type: 3}
+  sprite: {fileID: 21300000, guid: f4e82506609e3f74a9cc341c36832e60, type: 3}
   hardness: 5
-  dropItem: {fileID: 0}

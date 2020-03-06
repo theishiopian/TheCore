@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2551b9d2e0e5aa429a7eb5ba28ce3ff, type: 3}
   m_Name: diamond_ore
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 278f765511c13c147971f31348507ef3, type: 3}
+  sprite: {fileID: 21300000, guid: fad42f0c540b79847944169128db89c2, type: 3}
   dropItem: {fileID: 996122466770115454, guid: bd018f56d72a4f045a4755ca58f6f532, type: 3}

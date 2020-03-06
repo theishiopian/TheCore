@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2551b9d2e0e5aa429a7eb5ba28ce3ff, type: 3}
   m_Name: saphire_ore
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 521892b6300570446b203d97b3119493, type: 3}
+  sprite: {fileID: 21300000, guid: 403a8fb23bb14fa4a90ddf19f3f3bf2a, type: 3}
   dropItem: {fileID: 996122466770115454, guid: 423d2cddf1558e04b86735204568fefd, type: 3}
