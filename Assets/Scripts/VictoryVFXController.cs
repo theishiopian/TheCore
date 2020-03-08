@@ -9,7 +9,7 @@ public class VictoryVFXController : MonoBehaviour
 
     public AnimationCurve yPosition;
 
-    public SpriteRenderer fadeSquare;
+    public SpriteRenderer fadeSquare;//TODO implement fade
 
     private Vector3 startingPos;
     private new SpriteRenderer renderer;

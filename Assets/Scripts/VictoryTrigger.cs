@@ -15,4 +15,17 @@ public class VictoryTrigger : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.tag == "Player")
+        {
+            
+            this.GetComponent<VictoryVFXController>().enabled = true;
+        }
+        else
+        {
+            Debug.Log("ERROR: non player collision in the earth's core");
+        }
+    }
 }

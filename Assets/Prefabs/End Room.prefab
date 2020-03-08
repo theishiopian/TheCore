@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6382791844600476529}
   - component: {fileID: 7948339805106318654}
   - component: {fileID: 9203271920712902041}
+  - component: {fileID: 7282112588269714006}
   m_Layer: 0
   m_Name: THE CORE
   m_TagString: Untagged
@@ -94,7 +95,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -148,6 +149,18 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   fadeSquare: {fileID: 6234310370548953551}
+--- !u!114 &7282112588269714006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540048276248652006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f13f60679bfe251499090b8cc1d82c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1456950138743466836
 GameObject:
   m_ObjectHideFlags: 0
