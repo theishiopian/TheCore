@@ -75,11 +75,6 @@ public class MapGenerator : MonoBehaviour
                 GlobalVars.LevelUpThresholds[i] = l;
                 Debug.Log(oreCount[i] + " " + l);
             }
-            else
-            {
-                //Debug.Log("level up for level " + (i+1) + " is infinite");
-                GlobalVars.LevelUpThresholds[i] = int.MaxValue;
-            }
         }
     }
 
