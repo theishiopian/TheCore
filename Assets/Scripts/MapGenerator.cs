@@ -186,7 +186,7 @@ public class MapGenerator : MonoBehaviour
     //the intMap is used to define the shape of the map
     void PopulateTileMaps()
     {
-        int layers = fillTiles.list.Count;
+        int layers = fillTiles.list.Count -1;
         int layerDepth = depth / layers;
 
         int currentLayer = 1;
@@ -205,27 +205,34 @@ public class MapGenerator : MonoBehaviour
                 {
                     if (intMap[x, y] > 0)
                     {
-                        //iterate debug vars
-                        cycles++;
-                        tiles++;
-
-                        //place tile
-                        int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
-
-                        //if(tile == 1)oreCount[currentLayer - 1]++;
-
-                        //stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
-
-                        TileBase currentTile = fillTiles.list[currentLayer - 1].list[tile];
-                        TileBase initialTile = fillTiles.list[currentLayer - 1].list[0];
-                        if (currentTile.GetType() == typeof(OreTile))
+                        if(y < depth -1)
                         {
-                            oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
-                            if (tile == 1) oreCount[currentLayer - 1]++;
-                            stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), initialTile);
+                            //iterate debug vars
+                            cycles++;
+                            tiles++;
+
+                            //place tile
+                            int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
+
+                            //if(tile == 1)oreCount[currentLayer - 1]++;
+
+                            //stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
+
+                            TileBase currentTile = fillTiles.list[currentLayer - 1].list[tile];
+                            TileBase initialTile = fillTiles.list[currentLayer - 1].list[0];
+                            if (currentTile.GetType() == typeof(OreTile))
+                            {
+                                oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
+                                if (tile == 1) oreCount[currentLayer - 1]++;
+                                stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), initialTile);
+                            }
+                            else
+                                stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
                         }
                         else
-                            stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
+                        {
+                            stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer].list[0]);
+                        }
                     }
                 }
             }

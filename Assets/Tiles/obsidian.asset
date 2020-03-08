@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: obsidian
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: cd402543349d63040baccbfb04d45566, type: 3}
-  hardness: 9999999
+  hardness: 6
