@@ -68,13 +68,14 @@ public class MapGenerator : MonoBehaviour
         {
             //Debug.Log(oreCount[i]);
 
-            if(oreCount[i] > 0)
+            if (oreCount[i] > 0)
             {
-                var l = oreCount[i] * ((i + 1) );
-                
+                var l = oreCount[i] * ((i + 1));
+
                 GlobalVars.LevelUpThresholds[i] = l;
                 Debug.Log(oreCount[i] + " " + l);
             }
+            else Debug.Log("ore count zero");
         }
     }
 
@@ -209,16 +210,12 @@ public class MapGenerator : MonoBehaviour
                             //place tile
                             int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
 
-                            //if(tile == 1)oreCount[currentLayer - 1]++;
-
-                            //stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer - 1].list[tile]);
-
                             TileBase currentTile = fillTiles.list[currentLayer - 1].list[tile];
                             TileBase initialTile = fillTiles.list[currentLayer - 1].list[0];
                             if (currentTile.GetType() == typeof(OreTile))
                             {
                                 oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
-                                if (tile == 1) oreCount[currentLayer - 1]++;
+                                if (tile > 0) oreCount[currentLayer - 1]++;
                                 stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), initialTile);
                             }
                             else
