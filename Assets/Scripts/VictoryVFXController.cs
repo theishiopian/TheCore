@@ -13,13 +13,16 @@ public class VictoryVFXController : MonoBehaviour
 
     private Vector3 startingPos;
     private new SpriteRenderer renderer;
+    private new Camera camera;
+    private CameraShake shaker;
     // Start is called before the first frame update
     void Start()
     {
         startingPos = this.transform.position;
         renderer = this.GetComponent<SpriteRenderer>();
+        camera = Camera.main;
+        shaker = camera.GetComponent<CameraShake>();
         StartCoroutine("Sequence");
-        
     }
 
     float t = 0;
@@ -47,6 +50,13 @@ public class VictoryVFXController : MonoBehaviour
             renderer.color -= new Color(0,0,0,0.1f);
         }
 
+        time = Time.time;
+
+        while(Time.time < time +5)
+        {
+            yield return new WaitForSeconds(0.033f);
+            fadeSquare.color += new Color(0, 0, 0, 0.1f);
+        }
         yield return null;
     }
 }

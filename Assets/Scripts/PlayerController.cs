@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Tilemap oreMap;
     private Rigidbody2D body;
     private new Camera camera;
+    private CameraShake shaker;
     private ParticleSystem.EmissionModule digEmit;
 
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         oreMap = GlobalVars.GetObject("ore_map").GetComponent<Tilemap>();
         body = this.GetComponent<Rigidbody2D>();
         camera = Camera.main;
+        shaker = camera.GetComponent<CameraShake>();
         digEmit = digParticles.emission;
     }
 
@@ -94,13 +96,15 @@ public class PlayerController : MonoBehaviour
                     Vector2 particlePos = new Vector2(gridPos.x + 0.5f, gridPos.y + 0.5f);
                     digParticles.transform.position = particlePos;
 
+                    shaker.ShakeCameraContinuous(0.2f, 0.02f);
+
                     StoneTile stone = (StoneTile)stoneMap.GetTile(gridPos);
                     OreTile ore = (OreTile)oreMap.GetTile(gridPos);
 
                     if(!(gridPos.x >= 7 || gridPos.x < -7))
                     {
                         if(stone.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
-                        digEmit.rateOverTime = 5;
+                        digEmit.rateOverTime = 25;
                         if (digProgress >= 0.6f)
                         {
                             stoneMap.SetTile(gridPos, null);
