@@ -5520,9 +5520,11 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 2c768aa2fb1a86f489bad1f1870e7791, type: 2}
       - {fileID: 11400000, guid: 9fa38c0fb09e3e24fa62809586df1efb, type: 2}
       - {fileID: 11400000, guid: 2d8be754f5088474cb8ca128d48b96d4, type: 2}
-      - {fileID: 11400000, guid: 29d80c039593267499a947ef9ce8c675, type: 2}
     - list:
       - {fileID: 11400000, guid: a1a6eba54d1aa904e9f174fc444f2258, type: 2}
+      - {fileID: 11400000, guid: fe358c35df93cdd4c859f476a0ab8c53, type: 2}
+      - {fileID: 11400000, guid: 29d80c039593267499a947ef9ce8c675, type: 2}
+    - list:
       - {fileID: 11400000, guid: fe358c35df93cdd4c859f476a0ab8c53, type: 2}
   endRoomPrefab: {fileID: 3512988625641340768, guid: aa9a1b7d2befde6468344b4b84aa70a2,
     type: 3}
