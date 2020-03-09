@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         
         if(digDir.magnitude > 0 && !rocket)
         {
+            //Debug.Log(0);
             try
             {
                 if (digDir.y > 0 || Mathf.Abs(digDir.x) > 0)
@@ -89,22 +90,30 @@ public class PlayerController : MonoBehaviour
 
                 if (hit.collider.CompareTag("Blocks"))
                 {
+                    //Debug.Log(1);
                     Vector3Int gridPos = grid.WorldToCell(hit.point + (digDir * 0.1f));
-
+                    //Debug.Log(1.1);
                     Vector2 particlePos = new Vector2(gridPos.x + 0.5f, gridPos.y + 0.5f);
+                    //Debug.Log(1.2);
                     digParticles.transform.position = particlePos;
-
+                    //Debug.Log(1.3);
                     shaker.ShakeCameraContinuous(0.2f, 0.02f);
-
+                    //Debug.Log(1.4);
                     StoneTile stone = (StoneTile)stoneMap.GetTile(gridPos);
+                    //Debug.Log(1.5);
                     OreTile ore = (OreTile)oreMap.GetTile(gridPos);
-
-                    if(!(gridPos.x >= 7 || gridPos.x < -7))
+                    //Debug.Log(1.6);
+                    bool inBounds = !(gridPos.x >= 7 || gridPos.x < -7);
+                    //Debug.Log(1.7);
+                    //Debug.Log(inBounds);
+                    if (inBounds)
                     {
-                        if(stone.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
+                        //Debug.Log(2);
+                        if (stone.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
                         digEmit.rateOverTime = 25;
                         if (digProgress >= 0.6f)
                         {
+                            //Debug.Log(3);
                             stoneMap.SetTile(gridPos, null);
                             oreMap.SetTile(gridPos, null);
                             digProgress = 0;
