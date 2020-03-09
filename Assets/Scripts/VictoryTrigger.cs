@@ -21,7 +21,7 @@ public class VictoryTrigger : MonoBehaviour
         if(collider.tag == "Player")
         {
             
-            this.GetComponent<VictoryVFXController>().enabled = true;
+            this.GetComponent<VictorySequenceController>().enabled = true;
         }
         else
         {

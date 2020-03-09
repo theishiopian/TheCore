@@ -3,9 +3,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
-    public float maxCameraSpeed;
-    
+    public float moveSpeed;    
     public ParticleSystem digParticles;
 
     private Grid grid;
@@ -70,11 +68,11 @@ public class PlayerController : MonoBehaviour
             body.AddForce(new Vector2(0, 20), ForceMode2D.Force);
         }
 
-        if (transform.position.y < 0)
-        {
-            var y = Mathf.SmoothDamp(camera.transform.position.y, this.transform.position.y, ref cameraVelocity, Time.deltaTime, maxCameraSpeed);
-            camera.transform.position = new Vector3(1.75f, y, -10);
-        }
+        //if (transform.position.y < 0)
+        //{
+        //    var y = Mathf.SmoothDamp(camera.transform.position.y, this.transform.position.y, ref cameraVelocity, Time.deltaTime, maxCameraSpeed);
+        //    camera.transform.position = new Vector3(1.75f, y, -10);
+        //}
 
         digDir = new Vector2(x,y).normalized;
         
