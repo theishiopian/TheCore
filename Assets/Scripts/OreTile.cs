@@ -39,8 +39,9 @@ public class OreTile : TileBase
 
         AssetDatabase.CreateAsset(CreateInstance<OreTile>(), path);//create the asset file at the specified location
     }
-    #endif
+#endif
 
+#if UNITY_EDITOR
     //this ppd just lets me collapse this section of code when im not working on it
     #region TileEditor Class
     //fun fact! you can have a class inside of a class! a class is just a definition for an object.
@@ -66,4 +67,5 @@ public class OreTile : TileBase
         }
     }
     #endregion
+#endif
 }

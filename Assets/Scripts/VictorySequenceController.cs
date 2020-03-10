@@ -70,7 +70,7 @@ public class VictorySequenceController : MonoBehaviour
             yield return new WaitForSeconds(0.033f);
             text.color += new Color(0, 0, 0, 0.1f);
         }
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
 
         time = Time.time;
         while (Time.time < time + 2)
