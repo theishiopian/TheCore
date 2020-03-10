@@ -35,10 +35,17 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Added " + value);
             Destroy(collision.collider.gameObject);
 
-            if(GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])
+            try
             {
-                GlobalVars.level++;
-                GlobalVars.xp = 0;
+                if (GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])
+                {
+                    GlobalVars.level++;
+                    GlobalVars.xp = 0;
+                }
+            }
+            catch
+            {
+
             }
         }
     }
