@@ -26,27 +26,46 @@ public class PlayerController : MonoBehaviour
         digEmit = digParticles.emission;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if(collision.collider.CompareTag("Item"))
+    //    {
+    //        int value = collision.collider.gameObject.GetComponent<Item>().value;
+    //        GlobalVars.xp += value;
+    //        Debug.Log("Added " + value);
+    //        Destroy(collision.collider.gameObject);
+
+    //        try
+    //        {
+    //            if (GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])
+    //            {
+    //                GlobalVars.level++;
+    //                GlobalVars.xp = 0;
+    //            }
+    //        }
+    //        catch
+    //        {
+
+    //        }
+    //    }
+    //}
+
+    public void AddXP(int value)
     {
-        if(collision.collider.CompareTag("Item"))
+        GlobalVars.xp += value;
+        Debug.Log("Added " + value);
+
+        try
         {
-            int value = collision.collider.gameObject.GetComponent<Item>().value;
-            GlobalVars.xp += value;
-            Debug.Log("Added " + value);
-            Destroy(collision.collider.gameObject);
-
-            try
+            if (GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])
             {
-                if (GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])
-                {
-                    GlobalVars.level++;
-                    GlobalVars.xp = 0;
-                }
+                GlobalVars.level++;
+                GlobalVars.xp = 0;
             }
-            catch
-            {
+        }
+        catch
+        {
 
-            }
         }
     }
 
