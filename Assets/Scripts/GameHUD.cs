@@ -46,7 +46,9 @@ public class GameHUD : MonoBehaviour
         arrowTransform.eulerAngles = new Vector3(0, 0, GetDepthRotation());
 
         //xp bar value
-        sliderBar.value = GlobalVars.xp;
+        //Debug.Log((float)GlobalVars.xp + "/" + (float)GlobalVars.LevelUpThresholds[GlobalVars.level]);
+        //Debug.Log(GlobalVars.xp / GlobalVars.LevelUpThresholds[GlobalVars.level]);
+        sliderBar.value = ((float)GlobalVars.xp)/((float)GlobalVars.LevelUpThresholds[GlobalVars.level]);
     }
 
     private float GetDepthRotation()
