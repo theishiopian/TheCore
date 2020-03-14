@@ -5,15 +5,20 @@ using UnityEngine.UI;
 
 public class GameHUD : MonoBehaviour
 {
+    //depth gauge
     private Transform arrowTransform;
     private const float MAX_DEPTH_ANGLE = -83;
     private const float ZERO_DEPTH_ANGLE = 83;
+    private float depthMax;
+
+    //xp bar
     private GameObject slider;
     private Slider sliderBar;
+
+    //level up
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
     public int currentSprite;
-    private float depthMax;
 
     private GameObject player;
     private MapGenerator gen;
@@ -23,16 +28,15 @@ public class GameHUD : MonoBehaviour
         player = GlobalVars.GetObject("player");
         gen = GlobalVars.GetObject("grid").GetComponent<MapGenerator>();
 
-        //set depth gauge stuff
+        //depth gauge stuff
         arrowTransform = GlobalVars.GetObject("needle").transform;
         depthMax = gen.depth;
 
-        //set xp bar stuff
+        //xp bar stuff
         slider = GlobalVars.GetObject("xp_bar");
         sliderBar = slider.GetComponent<Slider>();
 
-        //set level up stuff
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        //level up stuff
         spriteRenderer.sprite = spriteArray[0];
     }
 
@@ -57,14 +61,14 @@ public class GameHUD : MonoBehaviour
         return -Mathf.Lerp(MAX_DEPTH_ANGLE, ZERO_DEPTH_ANGLE, t);
     }
 
-    void ChangeLevelSprite()
-    {
-        spriteRenderer.sprite = spriteArray[currentSprite];
-        currentSprite++;
+    //void ChangeLevelSprite()
+    //{
+    //    spriteRenderer.sprite = spriteArray[currentSprite];
+    //    currentSprite++;
 
-        if (currentSprite >= spriteArray.Length)
-            currentSprite = 0;
-    }
+    //    if (currentSprite >= spriteArray.Length)
+    //        currentSprite = 0;
+    //}
    
 
 }
