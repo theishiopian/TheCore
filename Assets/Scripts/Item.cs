@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Item : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Item : MonoBehaviour
     //    sprite.localPosition = new Vector3(0, bounce.Evaluate(t), 0) * offset;
     //}
 
-
+    public GameObject prefab;
     public AnimationCurve curve = AnimationCurve.Linear(0.0f, 0.0f, 1.0f, 1.0f);
     Vector3 start;
     Transform end;
@@ -43,19 +44,33 @@ public class Item : MonoBehaviour
         start = this.transform.position;
         end = GlobalVars.GetObject("item_target").transform;
     }
-
+    bool run = true;
     // Update is called once per frame
     void Update()
     {
-        t += Time.deltaTime;
-        float s = t / duration;
-        transform.position = Vector3.Lerp(start, end.position, curve.Evaluate(s));
-
-        if (Vector3.Distance(this.transform.position, end.position) == 0)
+        if(run)
         {
-            Debug.Log("done");
-            GlobalVars.GetObject("player").GetComponent<PlayerController>().AddXP(value);
-            Destroy(this.gameObject);
+            t += Time.deltaTime;
+            float s = t / duration;
+            transform.position = Vector3.Lerp(start, end.position, curve.Evaluate(s));
+
+            if (Vector3.Distance(this.transform.position, end.position) == 0)
+            {
+                Debug.Log("done");
+                GlobalVars.GetObject("player").GetComponent<PlayerController>().AddXP(value);
+                StartCoroutine("DestructionSequence");
+                run = false;
+            }
         }
+    }
+
+    IEnumerator DestructionSequence()
+    {
+        var instance = Instantiate(prefab, this.transform.position, Quaternion.identity);
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(1f);
+        Destroy(instance);
+        Destroy(this.gameObject);
+        yield return null;
     }
 }
