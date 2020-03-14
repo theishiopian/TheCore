@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             {
                 GlobalVars.level++;
                 GlobalVars.xp = 0;
-                digParticleRenderer.material = particleMats[GlobalVars.level];
+                //digParticleRenderer.material = particleMats[GlobalVars.level];
             }
         }
         catch
@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour
                         //Debug.Log(2);
                         if (stone.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
                         digEmit.rateOverTime = 25;
+                        digParticleRenderer.material = particleMats[stone.hardness - 1];
                         if (digProgress >= 0.6f)
                         {
                             //Debug.Log(3);
