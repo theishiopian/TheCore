@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 7
+  prefab: {fileID: 8100776236457845001, guid: 7e05824f883a65b4a85857e3e1eb0c0a, type: 3}
   curve:
     serializedVersion: 2
     m_Curve:
