@@ -84,25 +84,26 @@ public class PlayerController : MonoBehaviour
 
     Vector2 digDir;
     float digProgress = 0;
-
+    Vector2 oldDir = new Vector2();
+    bool changed = false;
     private void FixedUpdate()
     {
-        if(digProgress == 0)body.position += new Vector2(x, 0);
+        digDir = new Vector2(x, y).normalized;
+        Debug.Log("new: " + digDir + " old: " +oldDir);
+        changed = false;
+        if (digDir != oldDir)
+        {
+            changed = true;
+        }
+        
+        if(!(digProgress>0))body.position += new Vector2(x, 0);
 
-        if (rocket && digProgress == 0)
+        if (rocket && !(digProgress > 0))
         {
             body.AddForce(new Vector2(0, 20), ForceMode2D.Force);
         }
-
-        //if (transform.position.y < 0)
-        //{
-        //    var y = Mathf.SmoothDamp(camera.transform.position.y, this.transform.position.y, ref cameraVelocity, Time.deltaTime, maxCameraSpeed);
-        //    camera.transform.position = new Vector3(1.75f, y, -10);
-        //}
-
-        digDir = new Vector2(x,y).normalized;
-        
-        if(digDir.magnitude > 0 && !rocket)
+             
+        if(digDir.magnitude > 0 && !rocket && !changed)
         {
             //Debug.Log(0);
             try
@@ -160,5 +161,6 @@ public class PlayerController : MonoBehaviour
             digProgress = 0;
             digEmit.rateOverTime = 0;
         }
+        oldDir = digDir;
     }
 }
