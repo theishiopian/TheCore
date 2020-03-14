@@ -137,7 +137,7 @@ public class MapGenerator : MonoBehaviour
                 int neighbourWallTiles = GetSurroundingTileCount(x, y);
                 if (neighbourWallTiles > 4)
                     intMap[x, y] = 1;
-                else if (neighbourWallTiles < 4)
+                else if (neighbourWallTiles < 3)
                     intMap[x, y] = 0;
 
                 //iterate debug var
