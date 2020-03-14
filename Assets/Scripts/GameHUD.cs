@@ -16,15 +16,17 @@ public class GameHUD : MonoBehaviour
     private Slider sliderBar;
 
     //level up
-    public SpriteRenderer spriteRenderer;
+    
     public Sprite[] spriteArray;
     public int currentSprite;
 
     private GameObject player;
     private MapGenerator gen;
+    private Image spriteRenderer;
 
     private void Start()
     {
+        spriteRenderer = GlobalVars.GetObject("nixie").GetComponent<Image>();
         player = GlobalVars.GetObject("player");
         gen = GlobalVars.GetObject("grid").GetComponent<MapGenerator>();
 
@@ -35,13 +37,13 @@ public class GameHUD : MonoBehaviour
         //xp bar stuff
         slider = GlobalVars.GetObject("xp_bar");
         sliderBar = slider.GetComponent<Slider>();
-
-        //level up stuff
-        spriteRenderer.sprite = spriteArray[0];
+        
     }
 
     private void Update()
     {
+        spriteRenderer.sprite = spriteArray[GlobalVars.level];
+
         //arrow angle corresponds to depth change
         arrowTransform.eulerAngles = new Vector3(0, 0, GetDepthRotation());
 

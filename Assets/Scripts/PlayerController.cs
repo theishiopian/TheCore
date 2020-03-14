@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         digDir = new Vector2(x, y).normalized;
-        Debug.Log("new: " + digDir + " old: " +oldDir);
+        //Debug.Log("new: " + digDir + " old: " +oldDir);
         changed = false;
         if (digDir != oldDir)
         {
