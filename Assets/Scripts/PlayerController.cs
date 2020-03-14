@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private CameraShake shaker;
     private ParticleSystem.EmissionModule digEmit;
     private ParticleSystemRenderer digParticleRenderer;
+    private ParticleSystem lvlUp;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         digEmit = digParticles.emission;
         digParticleRenderer = digParticles.GetComponent<ParticleSystemRenderer>();
         digParticleRenderer.material = particleMats[0];
+        lvlUp = GlobalVars.GetObject("lvl_up").GetComponent<ParticleSystem>();
     }
 
     public void AddXP(int value)
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
             {
                 GlobalVars.level++;
                 GlobalVars.xp = 0;
+                lvlUp.Play();
                 //digParticleRenderer.material = particleMats[GlobalVars.level];
             }
         }
