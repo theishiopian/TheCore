@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;    
     public ParticleSystem digParticles;
+    public Material[] particleMats;
 
     private Grid grid;
     private Tilemap stoneMap;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private new Camera camera;
     private CameraShake shaker;
     private ParticleSystem.EmissionModule digEmit;
+    private ParticleSystemRenderer digParticleRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,31 +26,9 @@ public class PlayerController : MonoBehaviour
         camera = Camera.main;
         shaker = camera.GetComponent<CameraShake>();
         digEmit = digParticles.emission;
+        digParticleRenderer = digParticles.GetComponent<ParticleSystemRenderer>();
+        digParticleRenderer.material = particleMats[0];
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if(collision.collider.CompareTag("Item"))
-    //    {
-    //        int value = collision.collider.gameObject.GetComponent<Item>().value;
-    //        GlobalVars.xp += value;
-    //        Debug.Log("Added " + value);
-    //        Destroy(collision.collider.gameObject);
-
-    //        try
-    //        {
-    //            if (GlobalVars.xp >= GlobalVars.LevelUpThresholds[GlobalVars.level])
-    //            {
-    //                GlobalVars.level++;
-    //                GlobalVars.xp = 0;
-    //            }
-    //        }
-    //        catch
-    //        {
-
-    //        }
-    //    }
-    //}
 
     public void AddXP(int value)
     {
@@ -61,6 +41,7 @@ public class PlayerController : MonoBehaviour
             {
                 GlobalVars.level++;
                 GlobalVars.xp = 0;
+                digParticleRenderer.material = particleMats[GlobalVars.level];
             }
         }
         catch
