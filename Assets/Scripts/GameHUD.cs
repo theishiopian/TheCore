@@ -8,6 +8,7 @@ public class GameHUD : MonoBehaviour
     private Transform arrowTransform;
     private const float MAX_DEPTH_ANGLE = -83;
     private const float ZERO_DEPTH_ANGLE = 83;
+    public Slider slider;
 
     //TODO: hook up depth and depthMax to corresponding variables in our game,
     //      change arrow rotation to change with player's depth
@@ -46,6 +47,11 @@ public class GameHUD : MonoBehaviour
         t = Mathf.Abs(player.transform.position.y) / depthMax;
 
         return -Mathf.Lerp(MAX_DEPTH_ANGLE, ZERO_DEPTH_ANGLE, t);
+    }
+
+    public void SetExp(int exp)
+    {
+        slider.value = GlobalVars.xp;
     }
 
 }
