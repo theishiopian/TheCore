@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Item : MonoBehaviour
 {
@@ -55,7 +56,15 @@ public class Item : MonoBehaviour
         {
             Debug.Log("done");
             GlobalVars.GetObject("player").GetComponent<PlayerController>().AddXP(value);
-            Destroy(this.gameObject);
+            StartCoroutine("DestructionSequence");
         }
+    }
+
+    IEnumerator DestructionSequence()
+    {
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(1f);
+        Destroy(this.gameObject);
+        yield return null;
     }
 }
