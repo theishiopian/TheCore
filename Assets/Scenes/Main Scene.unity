@@ -16400,13 +16400,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   digParticles: {fileID: 387700911}
-  particleMats:
-  - {fileID: 2100000, guid: 440fc9f7a70ab9b47865b776edec2e6c, type: 2}
-  - {fileID: 2100000, guid: 02ff1a5187140bd4c9c73890013b9a7e, type: 2}
-  - {fileID: 2100000, guid: 7411189dadd6ae04fb84a3994384c582, type: 2}
-  - {fileID: 2100000, guid: cc31c65af32aaf84c8507d1528c3a2c6, type: 2}
-  - {fileID: 2100000, guid: 5b21d2edeec78d345ac4e4bb41776217, type: 2}
-  sparkMat: {fileID: 2100000, guid: 4c1be29f6a92095499711ade6666e3e3, type: 2}
+  particleMats: []
+  sparkMat: {fileID: 0}
 --- !u!114 &1297916694
 MonoBehaviour:
   m_ObjectHideFlags: 0
