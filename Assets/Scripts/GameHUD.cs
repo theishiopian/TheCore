@@ -8,10 +8,11 @@ public class GameHUD : MonoBehaviour
     private Transform arrowTransform;
     private const float MAX_DEPTH_ANGLE = -83;
     private const float ZERO_DEPTH_ANGLE = 83;
-    public Slider slider;
-
-    //TODO: hook up depth and depthMax to corresponding variables in our game,
-    //      change arrow rotation to change with player's depth
+    private GameObject slider;
+    private Slider sliderBar;
+    public SpriteRenderer spriteRenderer;
+    public Sprite[] spriteArray;
+    public int currentSprite;
     private float depthMax;
 
     private GameObject player;
@@ -21,20 +22,27 @@ public class GameHUD : MonoBehaviour
     {
         player = GlobalVars.GetObject("player");
         gen = GlobalVars.GetObject("grid").GetComponent<MapGenerator>();
+
+        //set depth gauge stuff
         arrowTransform = GlobalVars.GetObject("needle").transform;
         depthMax = gen.depth;
+
+        //set xp bar stuff
+        slider = GlobalVars.GetObject("xp_bar");
+        sliderBar = slider.GetComponent<Slider>();
+
+        //set level up stuff
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = spriteArray[0];
     }
 
     private void Update()
     {
-        ////for testing functionality
-        //depth += 30f * Time.deltaTime;
-
-
-        //if (depth > depthMax) depth = depthMax;
-
         //arrow angle corresponds to depth change
         arrowTransform.eulerAngles = new Vector3(0, 0, GetDepthRotation());
+
+        //xp bar value
+        sliderBar.value = GlobalVars.xp;
     }
 
     private float GetDepthRotation()
@@ -49,9 +57,14 @@ public class GameHUD : MonoBehaviour
         return -Mathf.Lerp(MAX_DEPTH_ANGLE, ZERO_DEPTH_ANGLE, t);
     }
 
-    public void SetExp(int exp)
+    void ChangeLevelSprite()
     {
-        slider.value = GlobalVars.xp;
+        spriteRenderer.sprite = spriteArray[currentSprite];
+        currentSprite++;
+
+        if (currentSprite >= spriteArray.Length)
+            currentSprite = 0;
     }
+   
 
 }
