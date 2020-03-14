@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;    
     public ParticleSystem digParticles;
     public Material[] particleMats;
+    public Material sparkMat;
+
 
     private Grid grid;
     private Tilemap stoneMap;
@@ -117,9 +119,17 @@ public class PlayerController : MonoBehaviour
                     if (inBounds)
                     {
                         //Debug.Log(2);
-                        if (stone.hardness <=(GlobalVars.level+1))digProgress += Time.deltaTime;
+                        if (stone.hardness <=(GlobalVars.level+1))
+                        {
+                            digProgress += Time.deltaTime;
+                            digParticleRenderer.material = particleMats[stone.hardness - 1];
+                        }
+                        else
+                        {
+                            digParticleRenderer.material = sparkMat;
+                        }
                         digEmit.rateOverTime = 25;
-                        digParticleRenderer.material = particleMats[stone.hardness - 1];
+                        
                         if (digProgress >= 0.6f)
                         {
                             //Debug.Log(3);
