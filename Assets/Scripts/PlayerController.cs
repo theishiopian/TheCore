@@ -121,11 +121,19 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log(inBounds);
                     if (inBounds)
                     {
-                        //Debug.Log(2);
+                        Debug.Log(2);
                         if (stone.hardness <=(GlobalVars.level+1))
                         {
                             digProgress += Time.deltaTime;
-                            digParticleRenderer.material = particleMats[stone.hardness - 1];
+                            
+                            try
+                            {
+                                digParticleRenderer.material = particleMats[stone.hardness - 1];
+                            }
+                            catch
+                            {
+
+                            }
                         }
                         else
                         {
