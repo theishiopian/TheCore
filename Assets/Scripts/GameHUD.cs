@@ -42,7 +42,14 @@ public class GameHUD : MonoBehaviour
 
     private void Update()
     {
-        spriteRenderer.sprite = spriteArray[GlobalVars.level];
+        try
+        {
+            spriteRenderer.sprite = spriteArray[GlobalVars.level];
+        }
+        catch
+        {
+
+        }
 
         //arrow angle corresponds to depth change
         arrowTransform.eulerAngles = new Vector3(0, 0, GetDepthRotation());
