@@ -121,6 +121,19 @@ public class PlayerController : MonoBehaviour
 
                 if (hit.collider.CompareTag("Blocks"))
                 {
+                    if(x > 0)
+                    {
+                        animator.Play("Drill_Right");
+                    }
+                    if (x < 0)
+                    {
+                        animator.Play("Drill_Left");
+                    }
+                    if(y < 0)
+                    {
+                        animator.Play("Drill_Down");
+                    }
+
                     //Debug.Log(1);
                     Vector3Int gridPos = grid.WorldToCell(hit.point + (digDir * 0.1f));
                     //Debug.Log(1.1);
