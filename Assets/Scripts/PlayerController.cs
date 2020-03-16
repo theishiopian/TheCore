@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public Material[] particleMats;
     public Material sparkMat;
 
-
     private Grid grid;
     private Tilemap stoneMap;
     private Tilemap oreMap;
@@ -18,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem.EmissionModule digEmit;
     private ParticleSystemRenderer digParticleRenderer;
     private ParticleSystem lvlUp;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         digParticleRenderer = digParticles.GetComponent<ParticleSystemRenderer>();
         digParticleRenderer.material = particleMats[0];
         lvlUp = GlobalVars.GetObject("lvl_up").GetComponent<ParticleSystem>();
+        animator = GetComponent<Animator>();
     }
 
     public void AddXP(int value)
@@ -74,6 +75,19 @@ public class PlayerController : MonoBehaviour
     bool changed = false;
     private void FixedUpdate()
     {
+        if(x < 0)
+        {
+            animator.Play("Walk_Left");
+        }
+        if(x>0)
+        {
+            animator.Play("Walk_Right");
+        }
+        if(x==0)
+        {
+            animator.Play("Idle");
+        }
+
         digDir = new Vector2(x, y).normalized;
         //Debug.Log("new: " + digDir + " old: " +oldDir);
         changed = false;
@@ -121,7 +135,6 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log(inBounds);
                     if (inBounds)
                     {
-                        Debug.Log(2);
                         if (stone.hardness <=(GlobalVars.level+1))
                         {
                             digProgress += Time.deltaTime;
