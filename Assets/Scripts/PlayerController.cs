@@ -75,19 +75,6 @@ public class PlayerController : MonoBehaviour
     bool changed = false;
     private void FixedUpdate()
     {
-        if(x < 0)
-        {
-            animator.Play("Walk_Left");
-        }
-        if(x>0)
-        {
-            animator.Play("Walk_Right");
-        }
-        if(x==0)
-        {
-            animator.Play("Idle");
-        }
-
         digDir = new Vector2(x, y).normalized;
         //Debug.Log("new: " + digDir + " old: " +oldDir);
         changed = false;
@@ -96,11 +83,28 @@ public class PlayerController : MonoBehaviour
             changed = true;
         }
         
-        if(!(digProgress>0))body.position += new Vector2(x, 0);
+        if (!(digProgress > 0) && !rocket)
+        {
+            body.position += new Vector2(x, 0);
+            if (x < 0)
+            {
+                animator.Play("Walk_Left");
+            }
+            if (x > 0)
+            {
+                animator.Play("Walk_Right");
+            }
+            if (x == 0)
+            {
+                animator.Play("Idle");
+            }
+        }
 
         if (rocket && !(digProgress > 0))
         {
+            body.position += new Vector2(x, 0);
             body.AddForce(new Vector2(0, 20), ForceMode2D.Force);
+            animator.Play("Fly_Up");
         }
              
         if(digDir.magnitude > 0 && !rocket && !changed)
