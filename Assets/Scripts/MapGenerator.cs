@@ -29,6 +29,8 @@ public class MapGenerator : MonoBehaviour
     [Range(0, 10)]
     public int smoothingIterations = 5;//how many times the generator smooths the tiles
 
+    public TileBase topTile;
+
     [SerializeField]
     public LayerList fillTiles;//the tiles to generate, organized by layer. the first tile in each layyer is the fill tile, the rest are ores
 
@@ -201,7 +203,11 @@ public class MapGenerator : MonoBehaviour
                 {
                     if (intMap[x, y] > 0)
                     {
-                        if(y < depth -1)
+                        if(y == 0)
+                        {
+                            stoneMap.SetTile(new Vector3Int(x - (width / 2), 0, 0), topTile);
+                        }
+                        else if(y < depth -1)
                         {
                             //iterate debug vars
                             cycles++;
