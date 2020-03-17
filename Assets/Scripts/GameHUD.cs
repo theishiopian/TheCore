@@ -23,9 +23,11 @@ public class GameHUD : MonoBehaviour
     private GameObject player;
     private MapGenerator gen;
     private Image spriteRenderer;
+    private Text depthText;
 
     private void Start()
     {
+        depthText = GlobalVars.GetObject("depth_text").GetComponent<Text>();
         spriteRenderer = GlobalVars.GetObject("nixie").GetComponent<Image>();
         player = GlobalVars.GetObject("player");
         gen = GlobalVars.GetObject("grid").GetComponent<MapGenerator>();
@@ -39,9 +41,11 @@ public class GameHUD : MonoBehaviour
         sliderBar = slider.GetComponent<Slider>();
         
     }
-
+    float y;
     private void Update()
     {
+        y = player.transform.position.y;
+        depthText.text = "Depth: " + (y < 1.4f ? (-Mathf.RoundToInt(y) + 1) + "m" : "Sea Level");
         try
         {
             spriteRenderer.sprite = spriteArray[GlobalVars.level];
