@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2551b9d2e0e5aa429a7eb5ba28ce3ff, type: 3}
   m_Name: junk_ore
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: b0525817946f39547a3b6e82ed83baa1, type: 3}
+  sprite: {fileID: 21300000, guid: a388f7530035f8245ab42026e110a09f, type: 3}
   dropItem: {fileID: 996122466770115454, guid: 26c2fd425698e234e91bc91f2c88baab, type: 3}

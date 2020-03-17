@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2551b9d2e0e5aa429a7eb5ba28ce3ff, type: 3}
   m_Name: tin_ore
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: d31df50e9084dac49846441c237207eb, type: 3}
+  sprite: {fileID: 21300000, guid: 7ef3b491e40885347b5133c6a322c586, type: 3}
   dropItem: {fileID: 996122466770115454, guid: 1b8de6e495f571d4296220c39076396f, type: 3}
