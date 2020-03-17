@@ -73,9 +73,9 @@ public class MapGenerator : MonoBehaviour
                 var l = oreCount[i] * ((i + 1));
 
                 GlobalVars.LevelUpThresholds[i] = l;
-                Debug.Log(oreCount[i] + " " + l);
+                //Debug.Log(oreCount[i] + " " + l);
             }
-            else Debug.Log("ore count zero");
+            //else Debug.Log("ore count zero");
         }
     }
 
