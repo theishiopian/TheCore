@@ -195,7 +195,7 @@ public class MapGenerator : MonoBehaviour
         if (intMap != null)
         {
             float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);//generate inital weights
-            for (int y = 0; y < depth; y++)
+            for (int y = 0; y < depth+21; y++)
             {
                 if ((y / currentLayer) == layerDepth)//if at layer transition
                 {
@@ -205,38 +205,46 @@ public class MapGenerator : MonoBehaviour
 
                 for (int x = 0; x < width; x++)
                 {
-                    background.SetTile(new Vector3Int(x - (width / 2), -y,0), backGroundTile);
-                    if (intMap[x, y] > 0)
+                    if(y < depth)
                     {
-                        if(y == 0)
+                        background.SetTile(new Vector3Int(x - (width / 2), -y, 0), backGroundTile);
+                        if (intMap[x, y] > 0)
                         {
-                            stoneMap.SetTile(new Vector3Int(x - (width / 2), 0, 0), topTile);
-                        }
-                        else if(y < depth -1)
-                        {
-                            //iterate debug vars
-                            cycles++;
-                            tiles++;
-
-                            //place tile
-                            int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
-
-                            TileBase currentTile = fillTiles.list[currentLayer - 1].list[tile];
-                            TileBase initialTile = fillTiles.list[currentLayer - 1].list[0];
-                            if (currentTile.GetType() == typeof(OreTile))
+                            if (y == 0)
                             {
-                                oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
-                                if (tile > 0) oreCount[currentLayer - 1]++;
-                                stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), initialTile);
+                                stoneMap.SetTile(new Vector3Int(x - (width / 2), 0, 0), topTile);
+                            }
+                            else if (y < depth - 1)
+                            {
+                                //iterate debug vars
+                                cycles++;
+                                tiles++;
+
+                                //place tile
+                                int tile = IsXYOnEdge(x, y) ? 0 : GetRandomWeightedIndex(weights);
+
+                                TileBase currentTile = fillTiles.list[currentLayer - 1].list[tile];
+                                TileBase initialTile = fillTiles.list[currentLayer - 1].list[0];
+                                if (currentTile.GetType() == typeof(OreTile))
+                                {
+                                    oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
+                                    if (tile > 0) oreCount[currentLayer - 1]++;
+                                    stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), initialTile);
+                                }
+                                else
+                                    stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
                             }
                             else
-                                stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
-                        }
-                        else
-                        {
-                            stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer].list[0]);
+                            {
+                                stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer].list[0]);
+                            }
                         }
                     }
+                    else
+                    {
+                        background.SetTile(new Vector3Int(x - (width / 2), -y, 0), coreBackTile);
+                    }
+
                 }
             }
 
