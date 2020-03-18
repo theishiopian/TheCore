@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystemRenderer digParticleRenderer;
     private ParticleSystem lvlUp;
     private Animator animator;
+    private ParticleSystem jetpack;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
         digParticleRenderer.material = particleMats[0];
         lvlUp = GlobalVars.GetObject("lvl_up").GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
+        jetpack = GlobalVars.GetObject("jetpack").GetComponent<ParticleSystem>();
     }
 
     public void AddXP(int value)
@@ -105,6 +107,11 @@ public class PlayerController : MonoBehaviour
             body.position += new Vector2(x, 0);
             body.AddForce(new Vector2(0, 20), ForceMode2D.Force);
             animator.Play("Fly_Up");
+            jetpack.emissionRate = 100;
+        }
+        else
+        {
+            jetpack.emissionRate = 0;
         }
              
         if(digDir.magnitude > 0 && !rocket && !changed)
