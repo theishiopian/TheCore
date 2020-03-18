@@ -45,7 +45,7 @@ public class GameHUD : MonoBehaviour
     private void Update()
     {
         y = player.transform.position.y;
-        depthText.text = "Depth: " + (y < 1.4f ? (-Mathf.RoundToInt(y) + 1) + "m" : "Sea Level");
+        depthText.text = (y < 1.4f ? (-Mathf.RoundToInt(y) + 1) + "m" : "Sea Level");
         try
         {
             spriteRenderer.sprite = spriteArray[GlobalVars.level];
