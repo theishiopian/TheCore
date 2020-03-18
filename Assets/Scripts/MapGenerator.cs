@@ -30,6 +30,8 @@ public class MapGenerator : MonoBehaviour
     public int smoothingIterations = 5;//how many times the generator smooths the tiles
 
     public TileBase topTile;
+    public TileBase backGroundTile;
+    public TileBase coreBackTile;
 
     [SerializeField]
     public LayerList fillTiles;//the tiles to generate, organized by layer. the first tile in each layyer is the fill tile, the rest are ores
@@ -38,6 +40,7 @@ public class MapGenerator : MonoBehaviour
 
     private Tilemap stoneMap;//cache to store the output tilemap
     private Tilemap oreMap;
+    private Tilemap background;
     private Grid grid;//cache to store output tilemap alignment grid
 
     private string seed;//seed for rng
@@ -54,6 +57,7 @@ public class MapGenerator : MonoBehaviour
         grid = GlobalVars.GetObject("grid").GetComponent<Grid>();
         stoneMap = GlobalVars.GetObject("stone_map").GetComponent<Tilemap>();
         oreMap = GlobalVars.GetObject("ore_map").GetComponent<Tilemap>();
+        background = GlobalVars.GetObject("background_map").GetComponent<Tilemap>();
         layerCount = fillTiles.list.Count;
         //cache stuff
 
@@ -201,6 +205,7 @@ public class MapGenerator : MonoBehaviour
 
                 for (int x = 0; x < width; x++)
                 {
+                    background.SetTile(new Vector3Int(x - (width / 2), -y,0), backGroundTile);
                     if (intMap[x, y] > 0)
                     {
                         if(y == 0)
