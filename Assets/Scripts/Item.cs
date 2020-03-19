@@ -37,12 +37,15 @@ public class Item : MonoBehaviour
     float duration = 1.0f;
     float t;
     GameObject player;
+    GameObject forgeDoor;
     // Use this for initialization
     void Start()
     {
         t = 0.0f;
         start = this.transform.position;
         end = GlobalVars.GetObject("item_target").transform;
+        forgeDoor = GlobalVars.GetObject("forge_door");
+        forgeDoor.SetActive(false);
     }
     bool run = true;
     // Update is called once per frame
@@ -70,6 +73,7 @@ public class Item : MonoBehaviour
         this.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(1f);
         Destroy(instance);
+        forgeDoor.SetActive(true);
         Destroy(this.gameObject);
         yield return null;
     }

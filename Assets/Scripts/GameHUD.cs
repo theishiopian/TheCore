@@ -26,6 +26,7 @@ public class GameHUD : MonoBehaviour
     private GameObject bitsGroup;
     private GameObject[] bits;
     private int oldLevel = 0;
+
     private void Start()
     {
         bitsGroup = GlobalVars.GetObject("rock_bits_group");
