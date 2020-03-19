@@ -52,18 +52,19 @@ public class GameHUD : MonoBehaviour
         //Debug.Log(GlobalVars.xp / GlobalVars.LevelUpThresholds[GlobalVars.level]);
 
         //Debug.Log(sliderBar.value = 0.5f);
-
-        try
+        if(GlobalVars.level <= gen.fillTiles.list.Length - 2)
         {
             sliderBar.value = ((float)GlobalVars.xp) / ((float)GlobalVars.LevelUpThresholds[GlobalVars.level]);
             nixieTube.sprite = spriteArray[GlobalVars.level];
-            //arrow angle corresponds to depth change
-            arrowTransform.eulerAngles = new Vector3(0, 0, GetDepthRotation());
         }
-        catch
+        else
         {
-            //Debug.Log("exception thrown");
+            sliderBar.value = 1;
+            nixieTube.enabled = false;
         }
+                
+        //arrow angle corresponds to depth change
+        arrowTransform.eulerAngles = new Vector3(0, 0, GetDepthRotation());
     }
 
     private float GetDepthRotation()

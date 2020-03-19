@@ -6238,7 +6238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 16
-  depth: 100
+  depth: 10
   useRandomSeed: 1
   customSeed: 
   randomFillPercent: 50

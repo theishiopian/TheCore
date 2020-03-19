@@ -17,7 +17,7 @@ public class LayerList
 
 public class MapGenerator : MonoBehaviour
 {
-    public int width;//width of generated map
+    [Range(10, 10000)]
     public int depth;//depth of generated map
 
     public bool useRandomSeed = true;
@@ -89,7 +89,7 @@ public class MapGenerator : MonoBehaviour
     void GenerateMap()
     {
         //fill map with random squares
-        intMap = new int[width, depth];
+        intMap = new int[16, depth];
         RandomFillMap();
 
         //do smoothing
@@ -116,7 +116,7 @@ public class MapGenerator : MonoBehaviour
 
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < 16; x++)
         {
             for (int y = 0; y < depth; y++)
             {
@@ -137,7 +137,7 @@ public class MapGenerator : MonoBehaviour
 
     void SmoothMap()//run smoothing iteration via cellular automata
     {
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < 16; x++)
         {
             for (int y = 0; y < depth; y++)
             {
@@ -161,7 +161,7 @@ public class MapGenerator : MonoBehaviour
         {
             for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++)
             {
-                if (neighbourX >= 0 && neighbourX < width && neighbourY >= 0 && neighbourY < depth)
+                if (neighbourX >= 0 && neighbourX < 16 && neighbourY >= 0 && neighbourY < depth)
                 {
                     if (neighbourX != gridX || neighbourY != gridY)
                     {
@@ -182,7 +182,7 @@ public class MapGenerator : MonoBehaviour
     //helper method to determine whether or not a tile is on the edge of the map
     private bool IsXYOnEdge(int x, int y)
     {
-        return (x == 0 || x == width - 1 || y == 0 || y == depth - 1);
+        return (x == 0 || x == 16 - 1 || y == 0 || y == depth - 1);
     }
 
     //meat and potatoes. this is where the tiles themselves are placed
@@ -204,16 +204,16 @@ public class MapGenerator : MonoBehaviour
                     weights = generateWeights(fillTiles.list[currentLayer - 1].list.Length);//regenerate weights for next layer
                 }
 
-                for (int x = 0; x < width; x++)
+                for (int x = 0; x < 16; x++)
                 {
                     if(y < depth)
                     {
-                        background.SetTile(new Vector3Int(x - (width / 2), -y, 0), backGroundTile);
+                        background.SetTile(new Vector3Int(x - (16 / 2), -y, 0), backGroundTile);
                         if (intMap[x, y] > 0)
                         {
                             if (y == 0)
                             {
-                                stoneMap.SetTile(new Vector3Int(x - (width / 2), 0, 0), topTile);
+                                stoneMap.SetTile(new Vector3Int(x - (16 / 2), 0, 0), topTile);
                             }
                             else if (y < depth - 1)
                             {
@@ -228,22 +228,22 @@ public class MapGenerator : MonoBehaviour
                                 TileBase initialTile = fillTiles.list[currentLayer - 1].list[0];
                                 if (currentTile.GetType() == typeof(OreTile))
                                 {
-                                    oreMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
+                                    oreMap.SetTile(new Vector3Int(x - (16 / 2), -y, 0), currentTile);
                                     if (tile > 0) oreCount[currentLayer - 1]++;
-                                    stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), initialTile);
+                                    stoneMap.SetTile(new Vector3Int(x - (16 / 2), -y, 0), initialTile);
                                 }
                                 else
-                                    stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), currentTile);
+                                    stoneMap.SetTile(new Vector3Int(x - (16 / 2), -y, 0), currentTile);
                             }
                             else
                             {
-                                stoneMap.SetTile(new Vector3Int(x - (width / 2), -y, 0), fillTiles.list[currentLayer].list[0]);
+                                stoneMap.SetTile(new Vector3Int(x - (16 / 2), -y, 0), fillTiles.list[currentLayer].list[0]);
                             }
                         }
                     }
                     else
                     {
-                        background.SetTile(new Vector3Int(x - (width / 2), -y, 0), coreBackTile);
+                        background.SetTile(new Vector3Int(x - (16 / 2), -y, 0), coreBackTile);
                     }
 
                 }
