@@ -56,7 +56,7 @@ public class Item : MonoBehaviour
 
             if (Vector3.Distance(this.transform.position, end.position) == 0)
             {
-                Debug.Log("done");
+                //Debug.Log("done");
                 GlobalVars.GetObject("player").GetComponent<PlayerController>().AddXP(value);
                 StartCoroutine("DestructionSequence");
                 run = false;

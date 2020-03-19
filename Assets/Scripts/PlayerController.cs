@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public void AddXP(int value)
     {
         GlobalVars.xp += value;
-        Debug.Log("Added " + value);
+        //Debug.Log("Added " + value);
 
         try
         {
