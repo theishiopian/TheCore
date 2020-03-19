@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
                     OreTile ore = (OreTile)oreMap.GetTile(gridPos);
                     //Debug.Log(1.6);
                     bool inBounds = !(gridPos.x >= 7 || gridPos.x < -7);
-                    //Debug.Log(1.7);
+                    Debug.Log(1);
                     //Debug.Log(inBounds);
                     if (inBounds)
                     {
@@ -178,15 +178,15 @@ public class PlayerController : MonoBehaviour
                             digParticleRenderer.material = sparkMat;
                         }
                         digParticles.emissionRate = 25;
-                        
+                        Debug.Log(2);
                         if (digProgress >= 0.6f)
                         {
-                            //Debug.Log(3);
+                            Debug.Log(3);
                             stoneMap.SetTile(gridPos, null);
                             oreMap.SetTile(gridPos, null);
                             digProgress = 0;
-                            digEmit.rateOverTime = 0;
-                            //Debug.Log(ore.dropItem);
+                            digParticles.emissionRate = 0;
+                            Debug.Log(ore.dropItem);
                             if (ore.dropItem != null) Instantiate(ore.dropItem, particlePos, Quaternion.identity);
                         }
                     }
