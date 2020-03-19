@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 5
-  prefab: {fileID: 8100776236457845001, guid: 7e05824f883a65b4a85857e3e1eb0c0a, type: 3}
+  burst: {fileID: 8100776236457845001, guid: 7e05824f883a65b4a85857e3e1eb0c0a, type: 3}
+  smoke: {fileID: 5938589648998546312, guid: c2378190ba83d1343b83181a66f84229, type: 3}
   curve:
     serializedVersion: 2
     m_Curve:

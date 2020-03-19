@@ -30,7 +30,8 @@ public class Item : MonoBehaviour
     //    sprite.localPosition = new Vector3(0, bounce.Evaluate(t), 0) * offset;
     //}
 
-    public GameObject prefab;
+    public GameObject burst;
+    public GameObject smoke;
     public AnimationCurve curve = AnimationCurve.Linear(0.0f, 0.0f, 1.0f, 1.0f);
     Vector3 start;
     Transform end;
@@ -61,7 +62,9 @@ public class Item : MonoBehaviour
             {
                 //Debug.Log("done");
                 GlobalVars.GetObject("player").GetComponent<PlayerController>().AddXP(value);
+                Debug.Log(smoke);
                 StartCoroutine("DestructionSequence");
+                
                 run = false;
             }
         }
@@ -69,10 +72,12 @@ public class Item : MonoBehaviour
 
     IEnumerator DestructionSequence()
     {
-        var instance = Instantiate(prefab, this.transform.position, Quaternion.identity);
+        var burst_instance = Instantiate(burst, this.transform.position, Quaternion.identity);
+        var smoke_instance = Instantiate(smoke, this.transform.position, Quaternion.identity);
         this.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(1f);
-        Destroy(instance);
+        Destroy(burst_instance);
+        Destroy(smoke_instance);
         forgeDoor.SetActive(true);
         Destroy(this.gameObject);
         yield return null;
