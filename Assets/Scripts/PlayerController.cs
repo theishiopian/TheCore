@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
+#pragma warning disable 0618
+
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;    
@@ -29,7 +31,6 @@ public class PlayerController : MonoBehaviour
         body = this.GetComponent<Rigidbody2D>();
         camera = Camera.main;
         shaker = camera.GetComponent<CameraShake>();
-        digEmit = digParticles.emission;
         digParticleRenderer = digParticles.GetComponent<ParticleSystemRenderer>();
         digParticleRenderer.material = particleMats[0];
         lvlUp = GlobalVars.GetObject("lvl_up").GetComponent<ParticleSystem>();
@@ -176,7 +177,7 @@ public class PlayerController : MonoBehaviour
                         {
                             digParticleRenderer.material = sparkMat;
                         }
-                        digEmit.rateOverTime = 25;
+                        digParticles.emissionRate = 25;
                         
                         if (digProgress >= 0.6f)
                         {
@@ -199,7 +200,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             digProgress = 0;
-            digEmit.rateOverTime = 0;
+            digParticles.emissionRate = 0;
         }
         oldDir = digDir;
     }

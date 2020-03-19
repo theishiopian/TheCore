@@ -21,6 +21,6 @@ public static class GlobalVars
         GameObject g;
         if (gameObjects.TryGetValue(key, out g))
             return g;
-        else throw new KeyNotFoundException();
+        else throw new KeyNotFoundException(key);
     }
 }
