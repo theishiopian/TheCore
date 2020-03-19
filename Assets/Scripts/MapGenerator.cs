@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+#pragma warning disable 0618
+
 //helper classes for editor-accessible nested lists
 [System.Serializable]
 public class Layer
