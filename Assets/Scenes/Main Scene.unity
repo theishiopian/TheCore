@@ -5770,7 +5770,7 @@ GameObject:
   - component: {fileID: 490794324}
   - component: {fileID: 490794325}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
