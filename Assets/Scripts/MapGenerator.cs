@@ -6,13 +6,13 @@ using UnityEngine.Tilemaps;
 [System.Serializable]
 public class Layer
 {
-    public List<TileBase> list;
+    public TileBase[] list;
 }
 
 [System.Serializable]
 public class LayerList
 {
-    public List<Layer> list;
+    public Layer[] list;
 }
 
 public class MapGenerator : MonoBehaviour
@@ -58,7 +58,7 @@ public class MapGenerator : MonoBehaviour
         stoneMap = GlobalVars.GetObject("stone_map").GetComponent<Tilemap>();
         oreMap = GlobalVars.GetObject("ore_map").GetComponent<Tilemap>();
         background = GlobalVars.GetObject("background_map").GetComponent<Tilemap>();
-        layerCount = fillTiles.list.Count-1;
+        layerCount = fillTiles.list.Length-1;//last layer is always the bottom wall
         //Debug.Log(layerCount);
         //cache stuff
 
@@ -194,14 +194,14 @@ public class MapGenerator : MonoBehaviour
         int currentLayer = 1;
         if (intMap != null)
         {
-            float[] weights = generateWeights(fillTiles.list[0].list.Count);//generate inital weights
+            float[] weights = generateWeights(fillTiles.list[0].list.Length);//generate inital weights
             for (int y = 0; y < depth+21; y++)
             {
                 if ((y / currentLayer) == layerDepth && currentLayer <= layerCount)//if at layer transition
                 {
-                    Debug.Log(currentLayer);
+                    //Debug.Log(currentLayer);
                     currentLayer++;
-                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);//regenerate weights for next layer
+                    weights = generateWeights(fillTiles.list[currentLayer - 1].list.Length);//regenerate weights for next layer
                 }
 
                 for (int x = 0; x < width; x++)
