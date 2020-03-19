@@ -58,10 +58,11 @@ public class MapGenerator : MonoBehaviour
         stoneMap = GlobalVars.GetObject("stone_map").GetComponent<Tilemap>();
         oreMap = GlobalVars.GetObject("ore_map").GetComponent<Tilemap>();
         background = GlobalVars.GetObject("background_map").GetComponent<Tilemap>();
-        layerCount = fillTiles.list.Count;
+        layerCount = fillTiles.list.Count-1;
+        //Debug.Log(layerCount);
         //cache stuff
 
-        oreCount = new int[fillTiles.list.Count];
+        oreCount = new int[layerCount];
 
         //do the thing
         GenerateMap();
@@ -188,17 +189,17 @@ public class MapGenerator : MonoBehaviour
     //the intMap is used to define the shape of the map
     void PopulateTileMaps()
     {
-        int layers = fillTiles.list.Count -1;
-        int layerDepth = depth / layers;
+        int layerDepth = depth / layerCount;
 
         int currentLayer = 1;
         if (intMap != null)
         {
-            float[] weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);//generate inital weights
+            float[] weights = generateWeights(fillTiles.list[0].list.Count);//generate inital weights
             for (int y = 0; y < depth+21; y++)
             {
-                if ((y / currentLayer) == layerDepth)//if at layer transition
+                if ((y / currentLayer) == layerDepth && currentLayer <= layerCount)//if at layer transition
                 {
+                    Debug.Log(currentLayer);
                     currentLayer++;
                     weights = generateWeights(fillTiles.list[currentLayer - 1].list.Count);//regenerate weights for next layer
                 }

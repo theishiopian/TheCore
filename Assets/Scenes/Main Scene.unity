@@ -555,7 +555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &270022111
 RectTransform:
   m_ObjectHideFlags: 0
@@ -721,7 +721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 359.88, y: -62.663}
+  m_AnchoredPosition: {x: 359.88, y: -63.6}
   m_SizeDelta: {x: 14.71, y: 134.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &360948147
@@ -773,7 +773,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 0
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 239628541}
   m_FillRect: {fileID: 239628540}
   m_HandleRect: {fileID: 0}
   m_Direction: 2
@@ -6304,7 +6304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &793818115
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6638,6 +6638,7 @@ GameObject:
   - component: {fileID: 1061782099}
   - component: {fileID: 1061782100}
   - component: {fileID: 1061782098}
+  - component: {fileID: 1061782101}
   m_Layer: 5
   m_Name: levelNumbers
   m_TagString: Untagged
@@ -6712,6 +6713,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061782096}
   m_CullTransparentMesh: 0
+--- !u!114 &1061782101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061782096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775404a63216e334fad211e0291c0ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: nixie
 --- !u!1 &1077469441
 GameObject:
   m_ObjectHideFlags: 0

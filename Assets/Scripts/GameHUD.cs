@@ -22,13 +22,13 @@ public class GameHUD : MonoBehaviour
 
     private GameObject player;
     private MapGenerator gen;
-    private Image spriteRenderer;
+    private Image nixieTube;
     private Text depthText;
 
     private void Start()
     {
         depthText = GlobalVars.GetObject("depth_text").GetComponent<Text>();
-        spriteRenderer = GlobalVars.GetObject("nixie").GetComponent<Image>();
+        nixieTube = GlobalVars.GetObject("nixie").GetComponent<Image>();
         player = GlobalVars.GetObject("player");
         gen = GlobalVars.GetObject("grid").GetComponent<MapGenerator>();
 
@@ -46,20 +46,23 @@ public class GameHUD : MonoBehaviour
     {
         y = player.transform.position.y;
         depthText.text = (y < 1.4f ? (-Mathf.RoundToInt(y) + 1) + "m" : "Sea Level");
+
+        //xp bar value
+        //Debug.Log((float)GlobalVars.xp + "/" + (float)GlobalVars.LevelUpThresholds[GlobalVars.level]);
+        //Debug.Log(GlobalVars.xp / GlobalVars.LevelUpThresholds[GlobalVars.level]);
+
+        //Debug.Log(sliderBar.value = 0.5f);
+
         try
         {
-            spriteRenderer.sprite = spriteArray[GlobalVars.level];
+            sliderBar.value = ((float)GlobalVars.xp) / ((float)GlobalVars.LevelUpThresholds[GlobalVars.level]);
+            nixieTube.sprite = spriteArray[GlobalVars.level];
             //arrow angle corresponds to depth change
             arrowTransform.eulerAngles = new Vector3(0, 0, GetDepthRotation());
-
-            //xp bar value
-            //Debug.Log((float)GlobalVars.xp + "/" + (float)GlobalVars.LevelUpThresholds[GlobalVars.level]);
-            //Debug.Log(GlobalVars.xp / GlobalVars.LevelUpThresholds[GlobalVars.level]);
-            sliderBar.value = ((float)GlobalVars.xp) / ((float)GlobalVars.LevelUpThresholds[GlobalVars.level]);
         }
         catch
         {
-
+            //Debug.Log("exception thrown");
         }
     }
 
