@@ -19,9 +19,11 @@ public class VictorySequenceController : MonoBehaviour
     private CameraShake shaker;
     private CameraFollow follow;
     private Text text;
+    private AudioPlayer sound;
     // Start is called before the first frame update
     void Start()
     {
+        sound = GlobalVars.GetObject("jukebox").GetComponent<AudioPlayer>();
         startingPos = this.transform.position;
         renderer = this.GetComponent<SpriteRenderer>();
         camera = Camera.main;
@@ -75,7 +77,8 @@ public class VictorySequenceController : MonoBehaviour
             text.color -= new Color(0, 0, 0, 0.1f);
             fadeSquare2.color += new Color(0, 0, 0, 0.1f);
         }
- 
+        sound.Stop(2);
+        sound.Play(3);
         SceneManager.LoadScene("Game End");
         yield return null;
     }

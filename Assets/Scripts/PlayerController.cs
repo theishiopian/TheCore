@@ -21,10 +21,12 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem lvlUp;
     private Animator animator;
     private ParticleSystem jetpack;
+    private AudioPlayer sound;
 
     // Start is called before the first frame update
     void Start()
     {
+        sound = GlobalVars.GetObject("jukebox").GetComponent<AudioPlayer>();
         grid = GlobalVars.GetObject("grid").GetComponent<Grid>();
         stoneMap = GlobalVars.GetObject("stone_map").GetComponent<Tilemap>();
         oreMap = GlobalVars.GetObject("ore_map").GetComponent<Tilemap>();
@@ -88,6 +90,7 @@ public class PlayerController : MonoBehaviour
         
         if (!(digProgress > 0) && !rocket)
         {
+            sound.Stop(0);
             body.position += new Vector2(x, 0);
             if (x < 0)
             {
@@ -105,6 +108,7 @@ public class PlayerController : MonoBehaviour
 
         if (rocket && !(digProgress > 0))
         {
+            sound.Stop(0);
             body.position += new Vector2(x, 0);
             body.AddForce(new Vector2(0, 20), ForceMode2D.Force);
             animator.Play("Fly_Up");
@@ -128,6 +132,7 @@ public class PlayerController : MonoBehaviour
 
                 if (hit.collider.CompareTag("Blocks"))
                 {
+                    sound.Play(0);
                     if(x > 0)
                     {
                         animator.Play("Drill_Right");
@@ -176,7 +181,7 @@ public class PlayerController : MonoBehaviour
                         }
                         digParticles.emissionRate = 25;
 
-                        if (digProgress >= 0.6f)
+                        if (digProgress >= 0.75f)
                         {
                             stoneMap.SetTile(gridPos, null);
                             oreMap.SetTile(gridPos, null);
