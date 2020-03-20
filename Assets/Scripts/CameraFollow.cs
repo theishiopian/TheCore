@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public float maxCameraSpeed;
-
+    public float offset;
     private GameObject target;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class CameraFollow : MonoBehaviour
         if (target.transform.position.y < 0)
         {
             var y = Mathf.SmoothDamp(target.transform.position.y, this.transform.position.y, ref cameraVelocity, Time.deltaTime, maxCameraSpeed);
-            transform.position = new Vector3(1.75f, y, -10);
+            transform.position = new Vector3(offset, y, -10);
         }
     }
 }
