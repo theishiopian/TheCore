@@ -53,9 +53,8 @@ public class VictorySequenceController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         yield return new WaitForSeconds(1f);
-        float time = Time.time;
 
-        while(Time.time < time +1)
+        while(fadeSquare.color.a < 1)
         {
             yield return new WaitForSeconds(0.033f);
             fadeSquare.color += new Color(0, 0, 0, 0.1f);
@@ -63,17 +62,15 @@ public class VictorySequenceController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        time = Time.time;
 
-        while (Time.time < time + 1)
+        while (text.color.a < 1)
         {
             yield return new WaitForSeconds(0.033f);
             text.color += new Color(0, 0, 0, 0.1f);
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
 
-        time = Time.time;
-        while (Time.time < time + 2)
+        while (fadeSquare2.color.a < 1)
         {
             yield return new WaitForSeconds(0.033f);
             text.color -= new Color(0, 0, 0, 0.1f);
