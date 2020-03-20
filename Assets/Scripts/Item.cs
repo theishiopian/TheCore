@@ -62,7 +62,7 @@ public class Item : MonoBehaviour
             {
                 //Debug.Log("done");
                 GlobalVars.GetObject("player").GetComponent<PlayerController>().AddXP(value);
-                Debug.Log(smoke);
+                //Debug.Log(smoke);
                 StartCoroutine("DestructionSequence");
                 
                 run = false;

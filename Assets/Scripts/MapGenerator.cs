@@ -68,8 +68,8 @@ public class MapGenerator : MonoBehaviour
 
         //do the thing
         GenerateMap();
-        Debug.Log("Loop cycles: " + cycles);
-        Debug.Log("Tiles placed: " + tiles);
+        //Debug.Log("Loop cycles: " + cycles);
+        //Debug.Log("Tiles placed: " + tiles);
 
         GlobalVars.LevelUpThresholds = new int[layerCount];
 
